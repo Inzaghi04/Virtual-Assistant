@@ -57,9 +57,9 @@ SemaphoreHandle_t xWifiConnected = NULL;
 #define I2S_DO_PIN    GPIO_NUM_6
 #define VOLUME_MULTIPLIER 3
 
-#define WIFI_SSID "Van Vuong"
-#define WIFI_PASS "n06111977"
-#define SEVER_URL   "http://192.168.1.11:5000/upload-audio"
+#define WIFI_SSID "YOUR_SSID"
+#define WIFI_PASS "YOUR_PASSWORD"
+#define SEVER_URL   "YOUR_URL/upload-audio"
 
 char recognized_text[512];
 
