@@ -1,0 +1,120 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D C:\esp\Complete\build\bootloader\esp-idf\esptool_py && C:\esp\Espressif\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/esp/Complete/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5260 bytes. 0x2da0 bytes (36%) free.
+[2/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+In file included from C:/esp/Complete/main/main.c:5:
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/driver/i2s.h:27:2: warning: #warning "This set of I2S APIs has been deprecated, please include 'driver/i2s_std.h', 'driver/i2s_pdm.h' or 'driver/i2s_tdm.h' instead. if you want to keep using the old APIs and ignore this warning, you can enable 'Suppress legacy driver deprecated warning' option under 'I2S Configuration' menu in Kconfig" [-Wcpp]
+   27 | #warning "This set of I2S APIs has been deprecated, \
+      |  ^~~~~~~
+C:/esp/Complete/main/main.c:35: warning: "MAINBUF_SIZE" redefined
+   35 | #define MAINBUF_SIZE       1152
+      | 
+In file included from C:/esp/Complete/main/main.c:12:
+C:/esp/Complete/components/helix_mp3_decoder/include/mp3dec.h:76: note: this is the location of the previous definition
+   76 | #define MAINBUF_SIZE    1940
+      | 
+C:/esp/Complete/main/main.c: In function 'i2s_init':
+C:/esp/Complete/main/main.c:169:9: warning: 'I2S_COMM_FORMAT_I2S_MSB' is deprecated [-Wdeprecated-declarations]
+  169 |         .communication_format= I2S_COMM_FORMAT_I2S_MSB,
+      |         ^
+In file included from C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/driver/i2s.h:20:
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/driver/i2s_types_legacy.h:89:5: note: declared here
+   89 |     I2S_COMM_FORMAT_I2S_MSB   __attribute__((deprecated)) = 0x01, /*!< I2S format MSB, (I2S_COMM_FORMAT_I2S |I2S_COMM_FORMAT_I2S_MSB) correspond to `I2S_COMM_FORMAT_STAND_I2S`*/
+      |     ^~~~~~~~~~~~~~~~~~~~~~~
+C:/esp/Complete/main/main.c: In function 'amplify_audio':
+C:/esp/Complete/main/main.c:239:24: warning: comparison is always false due to limited range of data type [-Wtype-limits]
+  239 |         if (pcm_buf[i] > 32767) pcm_buf[i] = 32767;
+      |                        ^
+C:/esp/Complete/main/main.c:240:24: warning: comparison is always false due to limited range of data type [-Wtype-limits]
+  240 |         if (pcm_buf[i] < -32768) pcm_buf[i] = -32768;
+      |                        ^
+C:/esp/Complete/main/main.c: In function 'upload_wav_task':
+C:/esp/Complete/main/main.c:457:9: warning: unused variable 'status' [-Wunused-variable]
+  457 |     int status = esp_http_client_get_status_code(client);
+      |         ^~~~~~
+[3/8] Linking C static library esp-idf\main\libmain.a
+[4/8] Generating ld/sections.ld
+[5/8] Linking CXX executable main.elf
+[6/8] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated C:/esp/Complete/build/main.bin
+[7/8] cmd.exe /C "cd /D C:\esp\Complete\build\esp-idf\esptool_py && C:\esp\Espressif\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app C:/esp/Complete/build/partition_table/partition-table.bin C:/esp/Complete/build/main.bin"
+main.bin binary size 0x109ec0 bytes. Smallest app partition is 0x177000 bytes. 0x6d140 bytes (29%) free.
+[7/8] cmd.exe /C "cd /D C:\esp\Espressif\frameworks\esp-idf-v5.3.1\components\esptool_py && C:\esp\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/esp/Espressif/frameworks/esp-idf-v5.3.1 -D SERIAL_TOOL=C:/esp/Espressif/python_env/idf5.3_py3.11_env/Scripts/python.exe;;C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esptool.py --chip esp32s3 -p COM3 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 16MB 0x0 bootloader/bootloader.bin 0x10000 main.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.8.1
+Serial port COM3
+Connecting.....
+Chip is ESP32-S3 (QFN56) (revision v0.2)
+Features: WiFi, BLE, Embedded PSRAM 8MB (AP_3v3)
+Crystal is 40MHz
+MAC: 94:a9:90:28:d6:ec
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00000000 to 0x00005fff...
+Flash will be erased from 0x00010000 to 0x00119fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+SHA digest in image updated
+Compressed 21088 bytes to 13053...
+Writing at 0x00000000... (100 %)
+Wrote 21088 bytes (13053 compressed) at 0x00000000 in 0.7 seconds (effective 229.9 kbit/s)...
+Hash of data verified.
+Compressed 1089216 bytes to 684975...
+Writing at 0x00010000... (2 %)
+Writing at 0x0001e228... (4 %)
+Writing at 0x000291a7... (7 %)
+Writing at 0x0002dd73... (9 %)
+Writing at 0x00032c99... (11 %)
+Writing at 0x00038363... (14 %)
+Writing at 0x0003e261... (16 %)
+Writing at 0x000437fe... (19 %)
+Writing at 0x0004fbf7... (21 %)
+Writing at 0x00055b68... (23 %)
+Writing at 0x0005c2db... (26 %)
+Writing at 0x000624c8... (28 %)
+Writing at 0x0006867a... (30 %)
+Writing at 0x0006e913... (33 %)
+Writing at 0x00074642... (35 %)
+Writing at 0x0007a302... (38 %)
+Writing at 0x00080c37... (40 %)
+Writing at 0x0008694f... (42 %)
+Writing at 0x0008c6c8... (45 %)
+Writing at 0x00091792... (47 %)
+Writing at 0x00096766... (50 %)
+Writing at 0x0009b8e5... (52 %)
+Writing at 0x000a0952... (54 %)
+Writing at 0x000a5db4... (57 %)
+Writing at 0x000ab071... (59 %)
+Writing at 0x000b1734... (61 %)
+Writing at 0x000b729b... (64 %)
+Writing at 0x000bcbb5... (66 %)
+Writing at 0x000c27e5... (69 %)
+Writing at 0x000c85d7... (71 %)
+Writing at 0x000cdd9c... (73 %)
+Writing at 0x000d3b9b... (76 %)
+Writing at 0x000da268... (78 %)
+Writing at 0x000dff75... (80 %)
+Writing at 0x000e5252... (83 %)
+Writing at 0x000ead34... (85 %)
+Writing at 0x000f4c7b... (88 %)
+Writing at 0x000fce3f... (90 %)
+Writing at 0x00103252... (92 %)
+Writing at 0x00108e54... (95 %)
+Writing at 0x0010f14d... (97 %)
+Writing at 0x00115493... (100 %)
+Wrote 1089216 bytes (684975 compressed) at 0x00010000 in 16.7 seconds (effective 522.3 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 105...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (105 compressed) at 0x00008000 in 0.1 seconds (effective 308.6 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
+esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args -D WORKING_DIRECTORY=C:/esp/Complete/build -P C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esptool_py/run_serial_tool.cmake"

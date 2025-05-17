@@ -1,0 +1,858 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x29 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x178c
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xcb8
+load:0x403cb700,len:0x2db0
+entry 0x403c8914
+[0;32mI (27) boot: ESP-IDF v5.3.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time May 14 2025 17:20:53[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.2[0m
+[0;32mI (34) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (39) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (44) boot.esp32s3: SPI Flash Size : 16MB[0m
+[0;32mI (49) boot: Enabling RNG early entropy source...[0m
+[0;32mI (54) boot: Partition Table:[0m
+[0;32mI (58) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (65) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (72) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (80) boot:  2 factory          factory app      00 00 00010000 00177000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3c0c0020 size=3f4a0h (259232) map[0m
+[0;32mI (146) esp_image: segment 1: paddr=0004f4c8 vaddr=3fc9b700 size=00b50h (  2896) load[0m
+[0;32mI (147) esp_image: segment 2: paddr=00050020 vaddr=42000020 size=b7fd8h (753624) map[0m
+[0;32mI (287) esp_image: segment 3: paddr=00108000 vaddr=3fc9c250 size=0422ch ( 16940) load[0m
+[0;32mI (291) esp_image: segment 4: paddr=0010c234 vaddr=40374000 size=17688h ( 95880) load[0m
+[0;32mI (324) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (324) boot: Disabling RNG early entropy source...[0m
+[0;32mI (336) cpu_start: Multicore app[0m
+[0;32mI (345) cpu_start: Pro cpu start user code[0m
+[0;32mI (345) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (345) app_init: Application information:[0m
+[0;32mI (348) app_init: Project name:     main[0m
+[0;32mI (352) app_init: App version:      1[0m
+[0;32mI (357) app_init: Compile time:     May 14 2025 17:20:12[0m
+[0;32mI (363) app_init: ELF file SHA256:  217115640...[0m
+[0;32mI (368) app_init: ESP-IDF:          v5.3.1-dirty[0m
+[0;32mI (373) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (378) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (383) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (388) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (395) heap_init: At 3FCA4BA0 len 00044B70 (274 KiB): RAM[0m
+[0;32mI (401) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (407) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (413) heap_init: At 600FE100 len 00001EE8 (7 KiB): RTCRAM[0m
+[0;32mI (421) spi_flash: detected chip: boya[0m
+[0;32mI (424) spi_flash: flash io: dio[0m
+[0;33mW (428) i2s(legacy): legacy i2s driver is deprecated, please migrate to use driver/i2s_std.h, driver/i2s_pdm.h or driver/i2s_tdm.h[0m
+[0;32mI (441) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (447) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (455) main_task: Started on CPU0[0m
+[0;32mI (475) main_task: Calling app_main()[0m
+[0;32mI (2485) gpio: GPIO[3]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (2485) gpio: GPIO[38]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2535) sdspi_transaction: cmd=52, R1 response: command not supported[0m
+[0;32mI (2655) sdspi_transaction: cmd=5, R1 response: command not supported[0m
+[0;32mI (2715) MP3Player: SD card mounted[0m
+[0;32mI (2715) pp: pp rom version: e7ae62f[0m
+[0;32mI (2715) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (2725) wifi:wifi driver task: 3fcc39c4, prio:23, stack:6656, core=0[0m
+[0;32mI (2735) wifi:wifi firmware version: ccaebfa[0m
+[0;32mI (2735) wifi:wifi certification version: v7.0[0m
+[0;32mI (2735) wifi:config NVS flash: enabled[0m
+[0;32mI (2735) wifi:config nano formating: disabled[0m
+[0;32mI (2735) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (2745) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (2745) wifi:Init management short buffer num: 32[0m
+[0;32mI (2755) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (2755) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (2755) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (2765) wifi:Init static rx buffer num: 10[0m
+[0;32mI (2765) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (2775) wifi_init: rx ba win: 6[0m
+[0;32mI (2775) wifi_init: accept mbox: 6[0m
+[0;32mI (2775) wifi_init: tcpip mbox: 32[0m
+[0;32mI (2785) wifi_init: udp mbox: 6[0m
+[0;32mI (2785) wifi_init: tcp mbox: 6[0m
+[0;32mI (2795) wifi_init: tcp tx win: 5760[0m
+[0;32mI (2795) wifi_init: tcp rx win: 5760[0m
+[0;32mI (2795) wifi_init: tcp mss: 1440[0m
+[0;32mI (2805) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (2805) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (2815) phy_init: phy_version 680,a6008b2,Jun  4 2024,16:41:10[0m
+[0;32mI (2855) wifi:mode : sta (94:a9:90:28:d6:ec)[0m
+[0;32mI (2855) wifi:enable tsf[0m
+[0;32mI (2865) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (2865) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (2865) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (2875) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (2875) wifi:<ba-add>idx:0 (ifx:0, a0:65:18:c4:b3:8d), tid:0, ssn:0, winSize:64[0m
+[0;32mI (2895) wifi:connected with Van Vuong, aid = 10, channel 1, BW20, bssid = a0:65:18:c4:b3:8d[0m
+[0;32mI (2895) wifi:security: WPA2-PSK, phy: bgn, rssi: -55[0m
+[0;32mI (2895) wifi:pm start, type: 1[0m
+
+[0;32mI (2895) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (2905) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (2965) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (3915) esp_netif_handlers: sta ip: 192.168.1.17, mask: 255.255.255.0, gw: 192.168.1.1[0m
+[0;32mI (12215) MP3Player: Start recording...[0m
+[0;32mI (14565) MP3Player: Recording done. Bytes = 75776[0m
+[0;32mI (21505) MP3Player: Văn bản nhận dạng: Xin chào game mini[0m
+[0;32mI (21505) MP3Player: ✅ File MP3 URL: https://tmpfiles.org/dl/28206344/response.mp3[0m
+[0;32mI (21755) wifi:<ba-add>idx:1 (ifx:0, a0:65:18:c4:b3:8d), tid:1, ssn:0, winSize:64[0m
+[0;32mI (24775) HTTP: Receiving data, len=342[0m
+[0;32mI (24825) HTTP: Receiving data, len=512[0m
+[0;32mI (24825) HTTP: Receiving data, len=345[0m
+[0;32mI (24835) HTTP: Receiving data, len=512[0m
+[0;32mI (24875) HTTP: Receiving data, len=512[0m
+[0;32mI (24875) HTTP: Receiving data, len=345[0m
+[0;32mI (24885) HTTP: Receiving data, len=512[0m
+[0;32mI (24925) HTTP: Receiving data, len=512[0m
+[0;32mI (24925) HTTP: Receiving data, len=345[0m
+[0;32mI (24935) HTTP: Receiving data, len=512[0m
+[0;32mI (24985) HTTP: Receiving data, len=512[0m
+[0;32mI (24985) HTTP: Receiving data, len=345[0m
+[0;32mI (24985) HTTP: Receiving data, len=512[0m
+[0;32mI (24995) HTTP: Receiving data, len=512[0m
+[0;32mI (24995) HTTP: Receiving data, len=345[0m
+[0;32mI (24995) HTTP: Receiving data, len=512[0m
+[0;32mI (25045) HTTP: Receiving data, len=512[0m
+[0;32mI (25045) HTTP: Receiving data, len=345[0m
+[0;32mI (25045) HTTP: Receiving data, len=512[0m
+[0;32mI (25055) HTTP: Receiving data, len=512[0m
+[0;32mI (25055) HTTP: Receiving data, len=345[0m
+[0;32mI (25065) HTTP: Receiving data, len=512[0m
+[0;32mI (25065) HTTP: Receiving data, len=512[0m
+[0;32mI (25065) HTTP: Receiving data, len=345[0m
+[0;32mI (25075) HTTP: Receiving data, len=512[0m
+[0;32mI (25125) HTTP: Receiving data, len=512[0m
+[0;32mI (25125) HTTP: Receiving data, len=345[0m
+[0;32mI (25135) HTTP: Receiving data, len=512[0m
+[0;32mI (25135) HTTP: Receiving data, len=512[0m
+[0;32mI (25135) HTTP: Receiving data, len=345[0m
+[0;32mI (25145) HTTP: Receiving data, len=512[0m
+[0;32mI (25145) HTTP: Receiving data, len=512[0m
+[0;32mI (25145) HTTP: Receiving data, len=345[0m
+[0;32mI (25155) HTTP: Receiving data, len=512[0m
+[0;32mI (25195) HTTP: Receiving data, len=512[0m
+[0;32mI (25195) HTTP: Receiving data, len=345[0m
+[0;32mI (25205) HTTP: Receiving data, len=512[0m
+[0;32mI (25205) HTTP: Receiving data, len=512[0m
+[0;32mI (25205) HTTP: Receiving data, len=345[0m
+[0;32mI (25215) HTTP: Receiving data, len=512[0m
+[0;32mI (25215) HTTP: Receiving data, len=512[0m
+[0;32mI (25225) HTTP: Receiving data, len=345[0m
+[0;32mI (25225) HTTP: Receiving data, len=512[0m
+[0;32mI (25275) HTTP: Receiving data, len=512[0m
+[0;32mI (25275) HTTP: Receiving data, len=345[0m
+[0;32mI (25275) HTTP: Receiving data, len=512[0m
+[0;32mI (25325) HTTP: Receiving data, len=512[0m
+[0;32mI (25325) HTTP: Receiving data, len=345[0m
+[0;32mI (25335) HTTP: Receiving data, len=512[0m
+[0;32mI (25375) HTTP: Receiving data, len=512[0m
+[0;32mI (25375) HTTP: Receiving data, len=345[0m
+[0;32mI (25385) HTTP: Receiving data, len=512[0m
+[0;32mI (25425) HTTP: Receiving data, len=512[0m
+[0;32mI (25425) HTTP: Receiving data, len=345[0m
+[0;32mI (25435) HTTP: Receiving data, len=512[0m
+[0;32mI (25435) HTTP: Receiving data, len=512[0m
+[0;32mI (25435) HTTP: Receiving data, len=345[0m
+[0;32mI (25445) HTTP: Receiving data, len=512[0m
+[0;32mI (25445) HTTP: Receiving data, len=512[0m
+[0;32mI (25455) HTTP: Receiving data, len=345[0m
+[0;32mI (25455) HTTP: Receiving data, len=512[0m
+[0;32mI (25505) HTTP: Receiving data, len=512[0m
+[0;32mI (25505) HTTP: Receiving data, len=345[0m
+[0;32mI (25505) HTTP: Receiving data, len=512[0m
+[0;32mI (25515) HTTP: Receiving data, len=512[0m
+[0;32mI (25515) HTTP: Receiving data, len=345[0m
+[0;32mI (25515) HTTP: Receiving data, len=512[0m
+[0;32mI (25525) HTTP: Receiving data, len=512[0m
+[0;32mI (25525) HTTP: Receiving data, len=345[0m
+[0;32mI (25535) HTTP: Receiving data, len=512[0m
+[0;32mI (25575) HTTP: Receiving data, len=512[0m
+[0;32mI (25575) HTTP: Receiving data, len=345[0m
+[0;32mI (25585) HTTP: Receiving data, len=512[0m
+[0;32mI (25585) HTTP: Receiving data, len=512[0m
+[0;32mI (25585) HTTP: Receiving data, len=345[0m
+[0;32mI (25595) HTTP: Receiving data, len=512[0m
+[0;32mI (25595) HTTP: Receiving data, len=512[0m
+[0;32mI (25595) HTTP: Receiving data, len=345[0m
+[0;32mI (25605) HTTP: Receiving data, len=512[0m
+[0;32mI (25645) HTTP: Receiving data, len=512[0m
+[0;32mI (25655) HTTP: Receiving data, len=345[0m
+[0;32mI (25655) HTTP: Receiving data, len=512[0m
+[0;32mI (25655) HTTP: Receiving data, len=512[0m
+[0;32mI (25665) HTTP: Receiving data, len=345[0m
+[0;32mI (25665) HTTP: Receiving data, len=512[0m
+[0;32mI (25665) HTTP: Receiving data, len=512[0m
+[0;32mI (25675) HTTP: Receiving data, len=345[0m
+[0;32mI (25675) HTTP: Receiving data, len=512[0m
+[0;32mI (25725) HTTP: Receiving data, len=512[0m
+[0;32mI (25725) HTTP: Receiving data, len=345[0m
+[0;32mI (25725) HTTP: Receiving data, len=512[0m
+[0;32mI (25735) HTTP: Receiving data, len=512[0m
+[0;32mI (25735) HTTP: Receiving data, len=345[0m
+[0;32mI (25745) HTTP: Receiving data, len=512[0m
+[0;32mI (25745) HTTP: Receiving data, len=512[0m
+[0;32mI (25745) HTTP: Receiving data, len=345[0m
+[0;32mI (25775) HTTP: Receiving data, len=512[0m
+[0;32mI (25815) HTTP: Receiving data, len=512[0m
+[0;32mI (25815) HTTP: Receiving data, len=345[0m
+[0;32mI (25825) HTTP: Receiving data, len=512[0m
+[0;32mI (25825) HTTP: Receiving data, len=512[0m
+[0;32mI (25835) HTTP: Receiving data, len=345[0m
+[0;32mI (25835) HTTP: Receiving data, len=512[0m
+[0;32mI (25845) HTTP: Receiving data, len=512[0m
+[0;32mI (25845) HTTP: Receiving data, len=345[0m
+[0;32mI (25855) HTTP: Receiving data, len=512[0m
+[0;32mI (25855) HTTP: Receiving data, len=512[0m
+[0;32mI (25855) HTTP: Receiving data, len=345[0m
+[0;32mI (25855) HTTP: Receiving data, len=512[0m
+[0;32mI (25865) HTTP: Receiving data, len=512[0m
+[0;32mI (25865) HTTP: Receiving data, len=345[0m
+[0;32mI (25875) HTTP: Receiving data, len=512[0m
+[0;32mI (25875) HTTP: Receiving data, len=512[0m
+[0;32mI (25875) HTTP: Receiving data, len=345[0m
+[0;32mI (25885) HTTP: Receiving data, len=512[0m
+[0;32mI (25895) HTTP: Receiving data, len=512[0m
+[0;32mI (25895) HTTP: Receiving data, len=345[0m
+[0;32mI (25895) HTTP: Receiving data, len=512[0m
+[0;32mI (25905) HTTP: Receiving data, len=512[0m
+[0;32mI (25905) HTTP: Receiving data, len=345[0m
+[0;32mI (25915) HTTP: Receiving data, len=512[0m
+[0;32mI (25965) HTTP: Receiving data, len=512[0m
+[0;32mI (25965) HTTP: Receiving data, len=512[0m
+[0;32mI (25965) HTTP: Receiving data, len=512[0m
+[0;32mI (25975) HTTP: Receiving data, len=512[0m
+[0;32mI (25975) HTTP: Receiving data, len=512[0m
+[0;32mI (25975) HTTP: Receiving data, len=512[0m
+[0;32mI (25985) HTTP: Receiving data, len=512[0m
+[0;32mI (25995) HTTP: Receiving data, len=133[0m
+[0;32mI (25995) HTTP: Receiving data, len=512[0m
+[0;32mI (26045) HTTP: Receiving data, len=512[0m
+[0;32mI (26045) HTTP: Receiving data, len=512[0m
+[0;32mI (26055) HTTP: Receiving data, len=512[0m
+[0;32mI (26055) HTTP: Receiving data, len=512[0m
+[0;32mI (26055) HTTP: Receiving data, len=512[0m
+[0;32mI (26065) HTTP: Receiving data, len=512[0m
+[0;32mI (26065) HTTP: Receiving data, len=512[0m
+[0;32mI (26075) HTTP: Receiving data, len=133[0m
+[0;32mI (26075) HTTP: Receiving data, len=512[0m
+[0;32mI (26125) HTTP: Receiving data, len=512[0m
+[0;32mI (26125) HTTP: Receiving data, len=512[0m
+[0;32mI (26125) HTTP: Receiving data, len=512[0m
+[0;32mI (26135) HTTP: Receiving data, len=512[0m
+[0;32mI (26135) HTTP: Receiving data, len=512[0m
+[0;32mI (26135) HTTP: Receiving data, len=512[0m
+[0;32mI (26145) HTTP: Receiving data, len=512[0m
+[0;32mI (26145) HTTP: Receiving data, len=133[0m
+[0;32mI (26155) HTTP: Receiving data, len=512[0m
+[0;32mI (26205) HTTP: Receiving data, len=512[0m
+[0;32mI (26205) HTTP: Receiving data, len=512[0m
+[0;32mI (26205) HTTP: Receiving data, len=512[0m
+[0;32mI (26205) HTTP: Receiving data, len=512[0m
+[0;32mI (26215) HTTP: Receiving data, len=512[0m
+[0;32mI (26215) HTTP: Receiving data, len=512[0m
+[0;32mI (26215) HTTP: Receiving data, len=512[0m
+[0;32mI (26225) HTTP: Receiving data, len=133[0m
+[0;32mI (26225) HTTP: Receiving data, len=512[0m
+[0;32mI (26275) HTTP: Receiving data, len=512[0m
+[0;32mI (26275) HTTP: Receiving data, len=238[0m
+[0;32mI (26275) HTTP: Download finished[0m
+[0;32mI (26285) HTTP: File closed[0m
+[0;32mI (26285) Audio: Successfully downloaded file[0m
+[0;32mI (26315) MP3Player: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (35345) MP3Player: Playback finished[0m
+[0;32mI (41185) MP3Player: Start recording...[0m
+[0;32mI (44295) MP3Player: Recording done. Bytes = 102400[0m
+[0;32mI (49765) MP3Player: Văn bản nhận dạng: bạn là ai[0m
+[0;32mI (49765) MP3Player: ✅ File MP3 URL: https://tmpfiles.org/dl/28206413/response.mp3[0m
+[0;32mI (52015) HTTP: Receiving data, len=341[0m
+[0;32mI (52065) HTTP: Receiving data, len=512[0m
+[0;32mI (52065) HTTP: Receiving data, len=345[0m
+[0;32mI (52075) HTTP: Receiving data, len=512[0m
+[0;32mI (52115) HTTP: Receiving data, len=512[0m
+[0;32mI (52115) HTTP: Receiving data, len=345[0m
+[0;32mI (52125) HTTP: Receiving data, len=512[0m
+[0;32mI (52125) HTTP: Receiving data, len=512[0m
+[0;32mI (52125) HTTP: Receiving data, len=345[0m
+[0;32mI (52135) HTTP: Receiving data, len=512[0m
+[0;32mI (52135) HTTP: Receiving data, len=512[0m
+[0;32mI (52135) HTTP: Receiving data, len=345[0m
+[0;32mI (52145) HTTP: Receiving data, len=512[0m
+[0;32mI (52145) HTTP: Receiving data, len=512[0m
+[0;32mI (52155) HTTP: Receiving data, len=345[0m
+[0;32mI (52155) HTTP: Receiving data, len=512[0m
+[0;32mI (52205) HTTP: Receiving data, len=512[0m
+[0;32mI (52205) HTTP: Receiving data, len=345[0m
+[0;32mI (52215) HTTP: Receiving data, len=512[0m
+[0;32mI (52215) HTTP: Receiving data, len=512[0m
+[0;32mI (52215) HTTP: Receiving data, len=345[0m
+[0;32mI (52225) HTTP: Receiving data, len=512[0m
+[0;32mI (52225) HTTP: Receiving data, len=512[0m
+[0;32mI (52225) HTTP: Receiving data, len=345[0m
+[0;32mI (52235) HTTP: Receiving data, len=512[0m
+[0;32mI (52275) HTTP: Receiving data, len=512[0m
+[0;32mI (52285) HTTP: Receiving data, len=345[0m
+[0;32mI (52285) HTTP: Receiving data, len=512[0m
+[0;32mI (52285) HTTP: Receiving data, len=512[0m
+[0;32mI (52295) HTTP: Receiving data, len=345[0m
+[0;32mI (52295) HTTP: Receiving data, len=512[0m
+[0;32mI (52295) HTTP: Receiving data, len=512[0m
+[0;32mI (52305) HTTP: Receiving data, len=345[0m
+[0;32mI (52305) HTTP: Receiving data, len=512[0m
+[0;32mI (52355) HTTP: Receiving data, len=512[0m
+[0;32mI (52355) HTTP: Receiving data, len=345[0m
+[0;32mI (52355) HTTP: Receiving data, len=512[0m
+[0;32mI (52365) HTTP: Receiving data, len=512[0m
+[0;32mI (52365) HTTP: Receiving data, len=345[0m
+[0;32mI (52375) HTTP: Receiving data, len=512[0m
+[0;32mI (52375) HTTP: Receiving data, len=512[0m
+[0;32mI (52375) HTTP: Receiving data, len=345[0m
+[0;32mI (52385) HTTP: Receiving data, len=512[0m
+[0;32mI (52425) HTTP: Receiving data, len=512[0m
+[0;32mI (52425) HTTP: Receiving data, len=345[0m
+[0;32mI (52435) HTTP: Receiving data, len=512[0m
+[0;32mI (52435) HTTP: Receiving data, len=512[0m
+[0;32mI (52435) HTTP: Receiving data, len=345[0m
+[0;32mI (52445) HTTP: Receiving data, len=512[0m
+[0;32mI (52445) HTTP: Receiving data, len=512[0m
+[0;32mI (52445) HTTP: Receiving data, len=345[0m
+[0;32mI (52455) HTTP: Receiving data, len=512[0m
+[0;32mI (52505) HTTP: Receiving data, len=512[0m
+[0;32mI (52505) HTTP: Receiving data, len=345[0m
+[0;32mI (52515) HTTP: Receiving data, len=512[0m
+[0;32mI (52555) HTTP: Receiving data, len=512[0m
+[0;32mI (52555) HTTP: Receiving data, len=345[0m
+[0;32mI (52565) HTTP: Receiving data, len=512[0m
+[0;32mI (52565) HTTP: Receiving data, len=512[0m
+[0;32mI (52565) HTTP: Receiving data, len=345[0m
+[0;32mI (52575) HTTP: Receiving data, len=512[0m
+[0;32mI (52575) HTTP: Receiving data, len=512[0m
+[0;32mI (52575) HTTP: Receiving data, len=345[0m
+[0;32mI (52585) HTTP: Receiving data, len=512[0m
+[0;32mI (52585) HTTP: Receiving data, len=512[0m
+[0;32mI (52595) HTTP: Receiving data, len=345[0m
+[0;32mI (52605) HTTP: Receiving data, len=512[0m
+[0;32mI (52605) HTTP: Receiving data, len=512[0m
+[0;32mI (52605) HTTP: Receiving data, len=345[0m
+[0;32mI (52615) HTTP: Receiving data, len=512[0m
+[0;32mI (52615) HTTP: Receiving data, len=512[0m
+[0;32mI (52625) HTTP: Receiving data, len=345[0m
+[0;32mI (52625) HTTP: Receiving data, len=512[0m
+[0;32mI (52635) HTTP: Receiving data, len=512[0m
+[0;32mI (52635) HTTP: Receiving data, len=345[0m
+[0;32mI (52645) HTTP: Receiving data, len=512[0m
+[0;32mI (52645) HTTP: Receiving data, len=512[0m
+[0;32mI (52645) HTTP: Receiving data, len=345[0m
+[0;32mI (52655) HTTP: Receiving data, len=512[0m
+[0;32mI (52705) HTTP: Receiving data, len=512[0m
+[0;32mI (52705) HTTP: Receiving data, len=345[0m
+[0;32mI (52705) HTTP: Receiving data, len=512[0m
+[0;32mI (52715) HTTP: Receiving data, len=512[0m
+[0;32mI (52715) HTTP: Receiving data, len=345[0m
+[0;32mI (52715) HTTP: Receiving data, len=512[0m
+[0;32mI (52725) HTTP: Receiving data, len=512[0m
+[0;32mI (52725) HTTP: Receiving data, len=345[0m
+[0;32mI (52725) HTTP: Receiving data, len=512[0m
+[0;32mI (52775) HTTP: Receiving data, len=512[0m
+[0;32mI (52775) HTTP: Receiving data, len=345[0m
+[0;32mI (52785) HTTP: Receiving data, len=512[0m
+[0;32mI (52785) HTTP: Receiving data, len=512[0m
+[0;32mI (52785) HTTP: Receiving data, len=345[0m
+[0;32mI (52795) HTTP: Receiving data, len=512[0m
+[0;32mI (52795) HTTP: Receiving data, len=512[0m
+[0;32mI (52795) HTTP: Receiving data, len=345[0m
+[0;32mI (52805) HTTP: Receiving data, len=512[0m
+[0;32mI (52805) HTTP: Receiving data, len=512[0m
+[0;32mI (52815) HTTP: Receiving data, len=345[0m
+[0;32mI (52825) HTTP: Receiving data, len=512[0m
+[0;32mI (52825) HTTP: Receiving data, len=512[0m
+[0;32mI (52825) HTTP: Receiving data, len=345[0m
+[0;32mI (52835) HTTP: Receiving data, len=512[0m
+[0;32mI (52835) HTTP: Receiving data, len=512[0m
+[0;32mI (52835) HTTP: Receiving data, len=345[0m
+[0;32mI (52845) HTTP: Receiving data, len=512[0m
+[0;32mI (52855) HTTP: Receiving data, len=512[0m
+[0;32mI (52855) HTTP: Receiving data, len=345[0m
+[0;32mI (52855) HTTP: Receiving data, len=512[0m
+[0;32mI (52865) HTTP: Receiving data, len=512[0m
+[0;32mI (52865) HTTP: Receiving data, len=345[0m
+[0;32mI (52875) HTTP: Receiving data, len=512[0m
+[0;32mI (52875) HTTP: Receiving data, len=512[0m
+[0;32mI (52885) HTTP: Receiving data, len=345[0m
+[0;32mI (52885) HTTP: Receiving data, len=512[0m
+[0;32mI (52885) HTTP: Receiving data, len=512[0m
+[0;32mI (52895) HTTP: Receiving data, len=345[0m
+[0;32mI (52905) HTTP: Receiving data, len=512[0m
+[0;32mI (52945) HTTP: Receiving data, len=512[0m
+[0;32mI (52945) HTTP: Receiving data, len=345[0m
+[0;32mI (52955) HTTP: Receiving data, len=512[0m
+[0;32mI (52995) HTTP: Receiving data, len=512[0m
+[0;32mI (53005) HTTP: Receiving data, len=512[0m
+[0;32mI (53005) HTTP: Receiving data, len=512[0m
+[0;32mI (53005) HTTP: Receiving data, len=512[0m
+[0;32mI (53015) HTTP: Receiving data, len=512[0m
+[0;32mI (53015) HTTP: Receiving data, len=512[0m
+[0;32mI (53015) HTTP: Receiving data, len=512[0m
+[0;32mI (53025) HTTP: Receiving data, len=133[0m
+[0;32mI (53035) HTTP: Receiving data, len=512[0m
+[0;32mI (53085) HTTP: Receiving data, len=512[0m
+[0;32mI (53085) HTTP: Receiving data, len=512[0m
+[0;32mI (53085) HTTP: Receiving data, len=512[0m
+[0;32mI (53095) HTTP: Receiving data, len=512[0m
+[0;32mI (53095) HTTP: Receiving data, len=512[0m
+[0;32mI (53095) HTTP: Receiving data, len=512[0m
+[0;32mI (53105) HTTP: Receiving data, len=512[0m
+[0;32mI (53105) HTTP: Receiving data, len=133[0m
+[0;32mI (53115) HTTP: Receiving data, len=512[0m
+[0;32mI (53155) HTTP: Receiving data, len=512[0m
+[0;32mI (53165) HTTP: Receiving data, len=512[0m
+[0;32mI (53165) HTTP: Receiving data, len=512[0m
+[0;32mI (53165) HTTP: Receiving data, len=512[0m
+[0;32mI (53165) HTTP: Receiving data, len=512[0m
+[0;32mI (53175) HTTP: Receiving data, len=512[0m
+[0;32mI (53175) HTTP: Receiving data, len=512[0m
+[0;32mI (53185) HTTP: Receiving data, len=133[0m
+[0;32mI (53195) HTTP: Receiving data, len=512[0m
+[0;32mI (53195) HTTP: Receiving data, len=512[0m
+[0;32mI (53195) HTTP: Receiving data, len=512[0m
+[0;32mI (53205) HTTP: Receiving data, len=512[0m
+[0;32mI (53205) HTTP: Receiving data, len=512[0m
+[0;32mI (53205) HTTP: Receiving data, len=512[0m
+[0;32mI (53215) HTTP: Receiving data, len=512[0m
+[0;32mI (53215) HTTP: Receiving data, len=512[0m
+[0;32mI (53225) HTTP: Receiving data, len=133[0m
+[0;32mI (53235) HTTP: Receiving data, len=512[0m
+[0;32mI (53275) HTTP: Receiving data, len=512[0m
+[0;32mI (53275) HTTP: Receiving data, len=512[0m
+[0;32mI (53275) HTTP: Receiving data, len=512[0m
+[0;32mI (53285) HTTP: Receiving data, len=512[0m
+[0;32mI (53295) HTTP: Receiving data, len=512[0m
+[0;32mI (53295) HTTP: Receiving data, len=512[0m
+[0;32mI (53295) HTTP: Receiving data, len=512[0m
+[0;32mI (53305) HTTP: Receiving data, len=133[0m
+[0;32mI (53305) HTTP: Receiving data, len=512[0m
+[0;32mI (53315) HTTP: Receiving data, len=512[0m
+[0;32mI (53315) HTTP: Receiving data, len=512[0m
+[0;32mI (53315) HTTP: Receiving data, len=512[0m
+[0;32mI (53325) HTTP: Receiving data, len=512[0m
+[0;32mI (53325) HTTP: Receiving data, len=512[0m
+[0;32mI (53335) HTTP: Receiving data, len=512[0m
+[0;32mI (53335) HTTP: Receiving data, len=512[0m
+[0;32mI (53345) HTTP: Receiving data, len=133[0m
+[0;32mI (53345) HTTP: Receiving data, len=512[0m
+[0;32mI (53395) HTTP: Receiving data, len=512[0m
+[0;32mI (53395) HTTP: Receiving data, len=512[0m
+[0;32mI (53395) HTTP: Receiving data, len=512[0m
+[0;32mI (53395) HTTP: Receiving data, len=512[0m
+[0;32mI (53405) HTTP: Receiving data, len=512[0m
+[0;32mI (53405) HTTP: Receiving data, len=512[0m
+[0;32mI (53415) HTTP: Receiving data, len=512[0m
+[0;32mI (53415) HTTP: Receiving data, len=133[0m
+[0;32mI (53425) HTTP: Receiving data, len=512[0m
+[0;32mI (53425) HTTP: Receiving data, len=512[0m
+[0;32mI (53435) HTTP: Receiving data, len=512[0m
+[0;32mI (53435) HTTP: Receiving data, len=512[0m
+[0;32mI (53435) HTTP: Receiving data, len=512[0m
+[0;32mI (53445) HTTP: Receiving data, len=512[0m
+[0;32mI (53445) HTTP: Receiving data, len=512[0m
+[0;32mI (53455) HTTP: Receiving data, len=512[0m
+[0;32mI (53455) HTTP: Receiving data, len=133[0m
+[0;32mI (53465) HTTP: Receiving data, len=512[0m
+[0;32mI (53505) HTTP: Receiving data, len=512[0m
+[0;32mI (53515) HTTP: Receiving data, len=512[0m
+[0;32mI (53515) HTTP: Receiving data, len=512[0m
+[0;32mI (53515) HTTP: Receiving data, len=512[0m
+[0;32mI (53515) HTTP: Receiving data, len=512[0m
+[0;32mI (53525) HTTP: Receiving data, len=512[0m
+[0;32mI (53525) HTTP: Receiving data, len=512[0m
+[0;32mI (53535) HTTP: Receiving data, len=133[0m
+[0;32mI (53535) HTTP: Receiving data, len=512[0m
+[0;32mI (53585) HTTP: Receiving data, len=512[0m
+[0;32mI (53585) HTTP: Receiving data, len=512[0m
+[0;32mI (53585) HTTP: Receiving data, len=512[0m
+[0;32mI (53595) HTTP: Receiving data, len=512[0m
+[0;32mI (53595) HTTP: Receiving data, len=512[0m
+[0;32mI (53595) HTTP: Receiving data, len=512[0m
+[0;32mI (53605) HTTP: Receiving data, len=512[0m
+[0;32mI (53605) HTTP: Receiving data, len=133[0m
+[0;32mI (53615) HTTP: Receiving data, len=512[0m
+[0;32mI (53655) HTTP: Receiving data, len=512[0m
+[0;32mI (53665) HTTP: Receiving data, len=512[0m
+[0;32mI (53665) HTTP: Receiving data, len=512[0m
+[0;32mI (53665) HTTP: Receiving data, len=512[0m
+[0;32mI (53665) HTTP: Receiving data, len=512[0m
+[0;32mI (53675) HTTP: Receiving data, len=512[0m
+[0;32mI (53675) HTTP: Receiving data, len=512[0m
+[0;32mI (53685) HTTP: Receiving data, len=133[0m
+[0;32mI (53695) HTTP: Receiving data, len=512[0m
+[0;32mI (53695) HTTP: Receiving data, len=512[0m
+[0;32mI (53695) HTTP: Receiving data, len=512[0m
+[0;32mI (53705) HTTP: Receiving data, len=512[0m
+[0;32mI (53705) HTTP: Receiving data, len=512[0m
+[0;32mI (53705) HTTP: Receiving data, len=512[0m
+[0;32mI (53715) HTTP: Receiving data, len=512[0m
+[0;32mI (53715) HTTP: Receiving data, len=512[0m
+[0;32mI (53725) HTTP: Receiving data, len=133[0m
+[0;32mI (53735) HTTP: Receiving data, len=512[0m
+[0;32mI (53735) HTTP: Receiving data, len=512[0m
+[0;32mI (53735) HTTP: Receiving data, len=512[0m
+[0;32mI (53745) HTTP: Receiving data, len=512[0m
+[0;32mI (53745) HTTP: Receiving data, len=512[0m
+[0;32mI (53755) HTTP: Receiving data, len=512[0m
+[0;32mI (53755) HTTP: Receiving data, len=512[0m
+[0;32mI (53755) HTTP: Receiving data, len=512[0m
+[0;32mI (53765) HTTP: Receiving data, len=133[0m
+[0;32mI (53775) HTTP: Receiving data, len=512[0m
+[0;32mI (53815) HTTP: Receiving data, len=512[0m
+[0;32mI (53825) HTTP: Receiving data, len=512[0m
+[0;32mI (53825) HTTP: Receiving data, len=512[0m
+[0;32mI (53825) HTTP: Receiving data, len=512[0m
+[0;32mI (53825) HTTP: Receiving data, len=512[0m
+[0;32mI (53835) HTTP: Receiving data, len=512[0m
+[0;32mI (53835) HTTP: Receiving data, len=512[0m
+[0;32mI (53845) HTTP: Receiving data, len=133[0m
+[0;32mI (53855) HTTP: Receiving data, len=512[0m
+[0;32mI (53855) HTTP: Receiving data, len=512[0m
+[0;32mI (53855) HTTP: Receiving data, len=512[0m
+[0;32mI (53855) HTTP: Receiving data, len=512[0m
+[0;32mI (53865) HTTP: Receiving data, len=512[0m
+[0;32mI (53865) HTTP: Receiving data, len=512[0m
+[0;32mI (53875) HTTP: Receiving data, len=512[0m
+[0;32mI (53875) HTTP: Receiving data, len=512[0m
+[0;32mI (53885) HTTP: Receiving data, len=133[0m
+[0;32mI (53885) HTTP: Receiving data, len=56[0m
+[0;32mI (53885) HTTP: Download finished[0m
+[0;32mI (53945) HTTP: File closed[0m
+[0;32mI (53945) Audio: Successfully downloaded file[0m
+[0;32mI (53975) MP3Player: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (68635) MP3Player: Playback finished[0m
+[0;32mI (70665) MP3Player: Start recording...[0m
+[0;32mI (73005) MP3Player: Recording done. Bytes = 77824[0m
+[0;32mI (78745) MP3Player: Văn bản nhận dạng: Địt con mẹ mày[0m
+[0;32mI (78745) MP3Player: ✅ File MP3 URL: https://tmpfiles.org/dl/28206462/response.mp3[0m
+[0;32mI (81305) HTTP: Receiving data, len=362[0m
+[0;32mI (81355) HTTP: Receiving data, len=512[0m
+[0;32mI (81355) HTTP: Receiving data, len=345[0m
+[0;32mI (81365) HTTP: Receiving data, len=512[0m
+[0;32mI (81365) HTTP: Receiving data, len=512[0m
+[0;32mI (81365) HTTP: Receiving data, len=345[0m
+[0;32mI (81375) HTTP: Receiving data, len=512[0m
+[0;32mI (81375) HTTP: Receiving data, len=512[0m
+[0;32mI (81375) HTTP: Receiving data, len=345[0m
+[0;32mI (81385) HTTP: Receiving data, len=512[0m
+[0;32mI (81435) HTTP: Receiving data, len=512[0m
+[0;32mI (81435) HTTP: Receiving data, len=345[0m
+[0;32mI (81435) HTTP: Receiving data, len=512[0m
+[0;32mI (81445) HTTP: Receiving data, len=512[0m
+[0;32mI (81445) HTTP: Receiving data, len=345[0m
+[0;32mI (81445) HTTP: Receiving data, len=512[0m
+[0;32mI (81445) HTTP: Receiving data, len=512[0m
+[0;32mI (81455) HTTP: Receiving data, len=345[0m
+[0;32mI (81465) HTTP: Receiving data, len=512[0m
+[0;32mI (81465) HTTP: Receiving data, len=512[0m
+[0;32mI (81465) HTTP: Receiving data, len=345[0m
+[0;32mI (81475) HTTP: Receiving data, len=512[0m
+[0;32mI (81475) HTTP: Receiving data, len=512[0m
+[0;32mI (81485) HTTP: Receiving data, len=345[0m
+[0;32mI (81485) HTTP: Receiving data, len=512[0m
+[0;32mI (81535) HTTP: Receiving data, len=512[0m
+[0;32mI (81535) HTTP: Receiving data, len=345[0m
+[0;32mI (81545) HTTP: Receiving data, len=512[0m
+[0;32mI (81545) HTTP: Receiving data, len=204[0m
+[0;32mI (81575) HTTP: Receiving data, len=512[0m
+[0;32mI (81615) HTTP: Receiving data, len=512[0m
+[0;32mI (81615) HTTP: Receiving data, len=345[0m
+[0;32mI (81625) HTTP: Receiving data, len=512[0m
+[0;32mI (81665) HTTP: Receiving data, len=512[0m
+[0;32mI (81675) HTTP: Receiving data, len=345[0m
+[0;32mI (81675) HTTP: Receiving data, len=512[0m
+[0;32mI (81675) HTTP: Receiving data, len=512[0m
+[0;32mI (81685) HTTP: Receiving data, len=345[0m
+[0;32mI (81685) HTTP: Receiving data, len=512[0m
+[0;32mI (81685) HTTP: Receiving data, len=512[0m
+[0;32mI (81695) HTTP: Receiving data, len=345[0m
+[0;32mI (81695) HTTP: Receiving data, len=512[0m
+[0;32mI (81705) HTTP: Receiving data, len=512[0m
+[0;32mI (81705) HTTP: Receiving data, len=345[0m
+[0;32mI (81715) HTTP: Receiving data, len=512[0m
+[0;32mI (81715) HTTP: Receiving data, len=512[0m
+[0;32mI (81725) HTTP: Receiving data, len=345[0m
+[0;32mI (81725) HTTP: Receiving data, len=512[0m
+[0;32mI (81725) HTTP: Receiving data, len=512[0m
+[0;32mI (81735) HTTP: Receiving data, len=345[0m
+[0;32mI (81745) HTTP: Receiving data, len=512[0m
+[0;32mI (81745) HTTP: Receiving data, len=512[0m
+[0;32mI (81745) HTTP: Receiving data, len=345[0m
+[0;32mI (81755) HTTP: Receiving data, len=512[0m
+[0;32mI (81755) HTTP: Receiving data, len=512[0m
+[0;32mI (81755) HTTP: Receiving data, len=345[0m
+[0;32mI (81765) HTTP: Receiving data, len=512[0m
+[0;32mI (81815) HTTP: Receiving data, len=512[0m
+[0;32mI (81815) HTTP: Receiving data, len=345[0m
+[0;32mI (81815) HTTP: Receiving data, len=512[0m
+[0;32mI (81825) HTTP: Receiving data, len=512[0m
+[0;32mI (81825) HTTP: Receiving data, len=345[0m
+[0;32mI (81835) HTTP: Receiving data, len=512[0m
+[0;32mI (81835) HTTP: Receiving data, len=512[0m
+[0;32mI (81835) HTTP: Receiving data, len=345[0m
+[0;32mI (81845) HTTP: Receiving data, len=372[0m
+[0;32mI (81845) HTTP: Receiving data, len=512[0m
+[0;32mI (81885) HTTP: Receiving data, len=512[0m
+[0;32mI (81895) HTTP: Receiving data, len=345[0m
+[0;32mI (81895) HTTP: Receiving data, len=512[0m
+[0;32mI (81895) HTTP: Receiving data, len=512[0m
+[0;32mI (81905) HTTP: Receiving data, len=345[0m
+[0;32mI (81905) HTTP: Receiving data, len=512[0m
+[0;32mI (81915) HTTP: Receiving data, len=512[0m
+[0;32mI (81915) HTTP: Receiving data, len=345[0m
+[0;32mI (81915) HTTP: Receiving data, len=512[0m
+[0;32mI (81925) HTTP: Receiving data, len=512[0m
+[0;32mI (81925) HTTP: Receiving data, len=345[0m
+[0;32mI (81935) HTTP: Receiving data, len=124[0m
+[0;32mI (81935) HTTP: Receiving data, len=512[0m
+[0;32mI (81945) HTTP: Receiving data, len=512[0m
+[0;32mI (81945) HTTP: Receiving data, len=345[0m
+[0;32mI (81955) HTTP: Receiving data, len=512[0m
+[0;32mI (81955) HTTP: Receiving data, len=512[0m
+[0;32mI (81955) HTTP: Receiving data, len=345[0m
+[0;32mI (81965) HTTP: Receiving data, len=512[0m
+[0;32mI (81965) HTTP: Receiving data, len=512[0m
+[0;32mI (81975) HTTP: Receiving data, len=345[0m
+[0;32mI (81975) HTTP: Receiving data, len=512[0m
+[0;32mI (82025) HTTP: Receiving data, len=512[0m
+[0;32mI (82025) HTTP: Receiving data, len=345[0m
+[0;32mI (82025) HTTP: Receiving data, len=124[0m
+[0;32mI (82035) HTTP: Receiving data, len=512[0m
+[0;32mI (82075) HTTP: Receiving data, len=512[0m
+[0;32mI (82085) HTTP: Receiving data, len=345[0m
+[0;32mI (82085) HTTP: Receiving data, len=512[0m
+[0;32mI (82095) HTTP: Receiving data, len=512[0m
+[0;32mI (82095) HTTP: Receiving data, len=345[0m
+[0;32mI (82095) HTTP: Receiving data, len=512[0m
+[0;32mI (82105) HTTP: Receiving data, len=512[0m
+[0;32mI (82105) HTTP: Receiving data, len=345[0m
+[0;32mI (82105) HTTP: Receiving data, len=512[0m
+[0;32mI (82115) HTTP: Receiving data, len=512[0m
+[0;32mI (82115) HTTP: Receiving data, len=345[0m
+[0;32mI (82125) HTTP: Receiving data, len=512[0m
+[0;32mI (82125) HTTP: Receiving data, len=512[0m
+[0;32mI (82135) HTTP: Receiving data, len=345[0m
+[0;32mI (82135) HTTP: Receiving data, len=512[0m
+[0;32mI (82145) HTTP: Receiving data, len=512[0m
+[0;32mI (82145) HTTP: Receiving data, len=345[0m
+[0;32mI (82155) HTTP: Receiving data, len=512[0m
+[0;32mI (82155) HTTP: Receiving data, len=512[0m
+[0;32mI (82155) HTTP: Receiving data, len=345[0m
+[0;32mI (82175) HTTP: Receiving data, len=512[0m
+[0;32mI (82225) HTTP: Receiving data, len=512[0m
+[0;32mI (82225) HTTP: Receiving data, len=512[0m
+[0;32mI (82225) HTTP: Receiving data, len=512[0m
+[0;32mI (82225) HTTP: Receiving data, len=512[0m
+[0;32mI (82235) HTTP: Receiving data, len=512[0m
+[0;32mI (82235) HTTP: Receiving data, len=512[0m
+[0;32mI (82235) HTTP: Receiving data, len=512[0m
+[0;32mI (82245) HTTP: Receiving data, len=133[0m
+[0;32mI (82255) HTTP: Receiving data, len=512[0m
+[0;32mI (82295) HTTP: Receiving data, len=512[0m
+[0;32mI (82295) HTTP: Receiving data, len=512[0m
+[0;32mI (82305) HTTP: Receiving data, len=512[0m
+[0;32mI (82305) HTTP: Receiving data, len=512[0m
+[0;32mI (82305) HTTP: Receiving data, len=12[0m
+[0;32mI (82315) HTTP: Receiving data, len=512[0m
+[0;32mI (82355) HTTP: Receiving data, len=512[0m
+[0;32mI (82355) HTTP: Receiving data, len=512[0m
+[0;32mI (82365) HTTP: Receiving data, len=512[0m
+[0;32mI (82375) HTTP: Receiving data, len=512[0m
+[0;32mI (82375) HTTP: Receiving data, len=512[0m
+[0;32mI (82375) HTTP: Receiving data, len=512[0m
+[0;32mI (82385) HTTP: Receiving data, len=512[0m
+[0;32mI (82385) HTTP: Receiving data, len=133[0m
+[0;32mI (82395) HTTP: Receiving data, len=512[0m
+[0;32mI (82435) HTTP: Receiving data, len=512[0m
+[0;32mI (82435) HTTP: Receiving data, len=512[0m
+[0;32mI (82445) HTTP: Receiving data, len=512[0m
+[0;32mI (82445) HTTP: Receiving data, len=512[0m
+[0;32mI (82445) HTTP: Receiving data, len=512[0m
+[0;32mI (82445) HTTP: Receiving data, len=512[0m
+[0;32mI (82455) HTTP: Receiving data, len=512[0m
+[0;32mI (82455) HTTP: Receiving data, len=133[0m
+[0;32mI (82465) HTTP: Receiving data, len=512[0m
+[0;32mI (82475) HTTP: Receiving data, len=512[0m
+[0;32mI (82475) HTTP: Receiving data, len=512[0m
+[0;32mI (82475) HTTP: Receiving data, len=512[0m
+[0;32mI (82485) HTTP: Receiving data, len=512[0m
+[0;32mI (82485) HTTP: Receiving data, len=512[0m
+[0;32mI (82495) HTTP: Receiving data, len=512[0m
+[0;32mI (82495) HTTP: Receiving data, len=512[0m
+[0;32mI (82495) HTTP: Receiving data, len=133[0m
+[0;32mI (82505) HTTP: Receiving data, len=512[0m
+[0;32mI (82555) HTTP: Receiving data, len=512[0m
+[0;32mI (82555) HTTP: Receiving data, len=512[0m
+[0;32mI (82555) HTTP: Receiving data, len=512[0m
+[0;32mI (82555) HTTP: Receiving data, len=512[0m
+[0;32mI (82565) HTTP: Receiving data, len=512[0m
+[0;32mI (82565) HTTP: Receiving data, len=512[0m
+[0;32mI (82575) HTTP: Receiving data, len=512[0m
+[0;32mI (82575) HTTP: Receiving data, len=133[0m
+[0;32mI (82575) HTTP: Receiving data, len=300[0m
+[0;32mI (82595) HTTP: Receiving data, len=512[0m
+[0;32mI (82595) HTTP: Receiving data, len=512[0m
+[0;32mI (82595) HTTP: Receiving data, len=512[0m
+[0;32mI (82595) HTTP: Receiving data, len=512[0m
+[0;32mI (82605) HTTP: Receiving data, len=512[0m
+[0;32mI (82605) HTTP: Receiving data, len=512[0m
+[0;32mI (82615) HTTP: Receiving data, len=512[0m
+[0;32mI (82615) HTTP: Receiving data, len=512[0m
+[0;32mI (82625) HTTP: Receiving data, len=133[0m
+[0;32mI (82625) HTTP: Receiving data, len=512[0m
+[0;32mI (82675) HTTP: Receiving data, len=512[0m
+[0;32mI (82675) HTTP: Receiving data, len=512[0m
+[0;32mI (82675) HTTP: Receiving data, len=512[0m
+[0;32mI (82675) HTTP: Receiving data, len=512[0m
+[0;32mI (82685) HTTP: Receiving data, len=512[0m
+[0;32mI (82685) HTTP: Receiving data, len=512[0m
+[0;32mI (82695) HTTP: Receiving data, len=512[0m
+[0;32mI (82695) HTTP: Receiving data, len=133[0m
+[0;32mI (82705) HTTP: Receiving data, len=512[0m
+[0;32mI (82745) HTTP: Receiving data, len=512[0m
+[0;32mI (82745) HTTP: Receiving data, len=512[0m
+[0;32mI (82755) HTTP: Receiving data, len=512[0m
+[0;32mI (82755) HTTP: Receiving data, len=512[0m
+[0;32mI (82755) HTTP: Receiving data, len=182[0m
+[0;32mI (82765) HTTP: Receiving data, len=512[0m
+[0;32mI (82765) HTTP: Receiving data, len=512[0m
+[0;32mI (82775) HTTP: Receiving data, len=512[0m
+[0;32mI (82785) HTTP: Receiving data, len=512[0m
+[0;32mI (82785) HTTP: Receiving data, len=512[0m
+[0;32mI (82785) HTTP: Receiving data, len=512[0m
+[0;32mI (82795) HTTP: Receiving data, len=512[0m
+[0;32mI (82795) HTTP: Receiving data, len=512[0m
+[0;32mI (82795) HTTP: Receiving data, len=133[0m
+[0;32mI (82805) HTTP: Receiving data, len=512[0m
+[0;32mI (82805) HTTP: Receiving data, len=512[0m
+[0;32mI (82815) HTTP: Receiving data, len=512[0m
+[0;32mI (82815) HTTP: Receiving data, len=512[0m
+[0;32mI (82825) HTTP: Receiving data, len=512[0m
+[0;32mI (82825) HTTP: Receiving data, len=512[0m
+[0;32mI (82825) HTTP: Receiving data, len=132[0m
+[0;32mI (82835) HTTP: Download finished[0m
+[0;32mI (82845) HTTP: File closed[0m
+[0;32mI (82845) Audio: Successfully downloaded file[0m
+[0;32mI (82875) MP3Player: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (94455) MP3Player: Playback finished[0m
+[0;32mI (95535) MP3Player: Start recording...[0m
+[0;32mI (98065) MP3Player: Recording done. Bytes = 83968[0m
+[0;32mI (105055) MP3Player: Văn bản nhận dạng: có cái con cặc[0m
+[0;32mI (105065) MP3Player: ✅ File MP3 URL: https://tmpfiles.org/dl/28206511/response.mp3[0m
+[0;32mI (107635) HTTP: Receiving data, len=364[0m
+[0;32mI (107675) HTTP: Receiving data, len=512[0m
+[0;32mI (107675) HTTP: Receiving data, len=345[0m
+[0;32mI (107685) HTTP: Receiving data, len=512[0m
+[0;32mI (107685) HTTP: Receiving data, len=512[0m
+[0;32mI (107685) HTTP: Receiving data, len=345[0m
+[0;32mI (107695) HTTP: Receiving data, len=512[0m
+[0;32mI (107695) HTTP: Receiving data, len=512[0m
+[0;32mI (107695) HTTP: Receiving data, len=345[0m
+[0;32mI (107705) HTTP: Receiving data, len=512[0m
+[0;32mI (107705) HTTP: Receiving data, len=512[0m
+[0;32mI (107715) HTTP: Receiving data, len=324[0m
+[0;32mI (107715) HTTP: Receiving data, len=512[0m
+[0;32mI (107725) HTTP: Receiving data, len=512[0m
+[0;32mI (107725) HTTP: Receiving data, len=345[0m
+[0;32mI (107735) HTTP: Receiving data, len=512[0m
+[0;32mI (107775) HTTP: Receiving data, len=512[0m
+[0;32mI (107775) HTTP: Receiving data, len=345[0m
+[0;32mI (107785) HTTP: Receiving data, len=512[0m
+[0;32mI (107785) HTTP: Receiving data, len=512[0m
+[0;32mI (107785) HTTP: Receiving data, len=345[0m
+[0;32mI (107795) HTTP: Receiving data, len=512[0m
+[0;32mI (107795) HTTP: Receiving data, len=512[0m
+[0;32mI (107795) HTTP: Receiving data, len=345[0m
+[0;32mI (107805) HTTP: Receiving data, len=512[0m
+[0;32mI (107855) HTTP: Receiving data, len=512[0m
+[0;32mI (107855) HTTP: Receiving data, len=345[0m
+[0;32mI (107855) HTTP: Receiving data, len=512[0m
+[0;32mI (107865) HTTP: Receiving data, len=223[0m
+[0;32mI (107865) HTTP: Receiving data, len=512[0m
+[0;32mI (107915) HTTP: Receiving data, len=512[0m
+[0;32mI (107915) HTTP: Receiving data, len=345[0m
+[0;32mI (107925) HTTP: Receiving data, len=512[0m
+[0;32mI (107925) HTTP: Receiving data, len=512[0m
+[0;32mI (107925) HTTP: Receiving data, len=345[0m
+[0;32mI (107935) HTTP: Receiving data, len=512[0m
+[0;32mI (107935) HTTP: Receiving data, len=512[0m
+[0;32mI (107935) HTTP: Receiving data, len=345[0m
+[0;32mI (107945) HTTP: Receiving data, len=512[0m
+[0;32mI (107945) HTTP: Receiving data, len=512[0m
+[0;32mI (107945) HTTP: Receiving data, len=345[0m
+[0;32mI (107955) HTTP: Receiving data, len=124[0m
+[0;32mI (107965) HTTP: Receiving data, len=512[0m
+[0;32mI (108005) HTTP: Receiving data, len=512[0m
+[0;32mI (108005) HTTP: Receiving data, len=345[0m
+[0;32mI (108015) HTTP: Receiving data, len=512[0m
+[0;32mI (108015) HTTP: Receiving data, len=512[0m
+[0;32mI (108015) HTTP: Receiving data, len=345[0m
+[0;32mI (108025) HTTP: Receiving data, len=512[0m
+[0;32mI (108025) HTTP: Receiving data, len=512[0m
+[0;32mI (108025) HTTP: Receiving data, len=345[0m
+[0;32mI (108035) HTTP: Receiving data, len=512[0m
+[0;32mI (108075) HTTP: Receiving data, len=512[0m
+[0;32mI (108085) HTTP: Receiving data, len=345[0m
+[0;32mI (108085) HTTP: Receiving data, len=512[0m
+[0;32mI (108095) HTTP: Receiving data, len=512[0m
+[0;32mI (108095) HTTP: Receiving data, len=345[0m
+[0;32mI (108095) HTTP: Receiving data, len=512[0m
+[0;32mI (108105) HTTP: Receiving data, len=512[0m
+[0;32mI (108105) HTTP: Receiving data, len=345[0m
+[0;32mI (108115) HTTP: Receiving data, len=512[0m
+[0;32mI (108155) HTTP: Receiving data, len=512[0m
+[0;32mI (108155) HTTP: Receiving data, len=345[0m
+[0;32mI (108165) HTTP: Receiving data, len=512[0m
+[0;32mI (108165) HTTP: Receiving data, len=512[0m
+[0;32mI (108175) HTTP: Receiving data, len=345[0m
+[0;32mI (108175) HTTP: Receiving data, len=248[0m
+[0;32mI (108175) HTTP: Receiving data, len=512[0m
+[0;32mI (108185) HTTP: Receiving data, len=512[0m
+[0;32mI (108185) HTTP: Receiving data, len=345[0m
+[0;32mI (108195) HTTP: Receiving data, len=512[0m
+[0;32mI (108195) HTTP: Receiving data, len=512[0m
+[0;32mI (108195) HTTP: Receiving data, len=345[0m
+[0;32mI (108205) HTTP: Receiving data, len=512[0m
+[0;32mI (108215) HTTP: Receiving data, len=512[0m
+[0;32mI (108215) HTTP: Receiving data, len=345[0m
+[0;32mI (108215) HTTP: Receiving data, len=512[0m
+[0;32mI (108225) HTTP: Receiving data, len=512[0m
+[0;32mI (108225) HTTP: Receiving data, len=345[0m
+[0;32mI (108235) HTTP: Receiving data, len=512[0m
+[0;32mI (108235) HTTP: Receiving data, len=512[0m
+[0;32mI (108245) HTTP: Receiving data, len=345[0m
+[0;32mI (108245) HTTP: Receiving data, len=512[0m
+[0;32mI (108255) HTTP: Receiving data, len=512[0m
+[0;32mI (108255) HTTP: Receiving data, len=345[0m
+[0;32mI (108265) HTTP: Receiving data, len=512[0m
+[0;32mI (108265) HTTP: Receiving data, len=512[0m
+[0;32mI (108265) HTTP: Receiving data, len=345[0m
+[0;32mI (108275) HTTP: Receiving data, len=512[0m
+[0;32mI (108275) HTTP: Receiving data, len=512[0m
+[0;32mI (108285) HTTP: Receiving data, len=345[0m
+[0;32mI (108295) HTTP: Receiving data, len=248[0m
+[0;32mI (108295) HTTP: Receiving data, len=512[0m
+[0;32mI (108295) HTTP: Receiving data, len=512[0m
+[0;32mI (108305) HTTP: Receiving data, len=345[0m
+[0;32mI (108305) HTTP: Receiving data, len=512[0m
+[0;32mI (108315) HTTP: Receiving data, len=512[0m
+[0;32mI (108315) HTTP: Receiving data, len=345[0m
+[0;32mI (108315) HTTP: Receiving data, len=512[0m
+[0;32mI (108325) HTTP: Receiving data, len=407[0m
+[0;32mI (108325) HTTP: Download finished[0m
+[0;32mI (108335) HTTP: File closed[0m
+[0;32mI (108335) Audio: Successfully downloaded file[0m
+[0;32mI (108365) MP3Player: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (113895) MP3Player: Playback finished[0m
