@@ -13,7 +13,7 @@
 
 
 #define RAPIDAPI_URL "https://express-voic-text-to-speech.p.rapidapi.com/getAudioLink"
-#define RAPIDAPI_KEY "3e88522fc4mshe4f3a32b6d1f360p1a5325jsn99ad543eae62"
+#define RAPIDAPI_KEY "YOUR_API_KEY"
 #define RAPIDAPI_HOST "express-voic-text-to-speech.p.rapidapi.com"
 
 static char *g_audio_url = NULL;
