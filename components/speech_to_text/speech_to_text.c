@@ -24,11 +24,11 @@
 
 
 #define RAPIDAPI_URL "https://speech-to-text-ai.p.rapidapi.com/transcribe"
-#define RAPIDAPI_KEY "13024e400amsh43f408a104b222cp1ceda4jsneee55ef567d5"
+#define RAPIDAPI_KEY "YOUR_API_KEY"
 #define RAPIDAPI_HOST "speech-to-text-ai.p.rapidapi.com"
 
 #define API_URL "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-#define API_KEY "AIzaSyDvDgIdNi8dsUslAK5yNE5C07nyt2OfBVU"
+#define API_KEY "YOUR_API_KEY"
 #define MAX_INPUT_LEN 512
 
 #define SAMPLE_RATE     (16000)
