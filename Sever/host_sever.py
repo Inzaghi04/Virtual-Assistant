@@ -1,15 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import os
 import speech_recognition as sr
 import google.generativeai as genai
 from gtts import gTTS
-import requests
 from werkzeug.utils import secure_filename
 from concurrent.futures import ThreadPoolExecutor
 
 # === Cấu hình ===
-API_KEY = "YOUR_API_KEY"  
-# UPLOAD_FOLDER = "./uploads"
+API_KEY = "YOUR_API_KEY"  # ← thay bằng key thật của bạn
+UPLOAD_FOLDER = "./uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Cấu hình Gemini
@@ -18,6 +17,8 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+executor = ThreadPoolExecutor(max_workers=2)
 
 # === Xử lý ghi âm => văn bản ===
 def audio_to_text(filepath):
@@ -31,31 +32,19 @@ def audio_to_text(filepath):
         print("❌ Lỗi khi nhận dạng giọng nói:", e)
         return None
 
-# === Gửi text tới Gemini và nhận file MP3 ===
-def process_with_gemini_and_get_mp3_url(prompt, mp3_filename="response.mp3"):
+# === Gửi text tới Gemini và tạo file MP3 trả lời ===
+def process_with_gemini_and_save_mp3(prompt, mp3_filename):
     prompt = "Vui lòng trả lời ngắn gọn trong 2-3 câu: " + prompt
     response = model.generate_content(prompt)
     reply_text = response.text
 
-    # Chuyển thành file MP3
+    # Tạo file MP3 từ văn bản
     tts = gTTS(reply_text, lang="vi")
     tts.save(mp3_filename)
+    print(f"✅ Đã lưu file MP3: {mp3_filename}")
+    return reply_text
 
-    # Upload lên tmpfiles.org
-    with open(mp3_filename, "rb") as f:
-        files = {'file': (mp3_filename, f)}
-        response = requests.post("https://tmpfiles.org/api/v1/upload", files=files)
-
-    if response.status_code == 200:
-        data = response.json()
-        raw_url = data.get("data", {}).get("url")
-        if raw_url:
-            return raw_url.replace("tmpfiles.org/", "tmpfiles.org/dl/")
-    return None
-
-# === API endpoint ===
-executor = ThreadPoolExecutor(max_workers=2)
-
+# === API upload audio và trả về text + URL mp3 nội bộ ===
 @app.route("/upload-audio", methods=["POST"])
 def upload_audio():
     if 'file' not in request.files:
@@ -66,29 +55,40 @@ def upload_audio():
         return jsonify({"error": "Tên file trống"}), 400
 
     filename = secure_filename(file.filename)
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    file.save(filepath)
+    audio_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(audio_path)
 
-    print(f"📥 Nhận file: {filepath}")
+    print(f"📥 Nhận file: {audio_path}")
 
-    # Xử lý văn bản trong thread riêng
-    future_text = executor.submit(audio_to_text, filepath)
-    text = future_text.result(timeout=15)  # Có thể điều chỉnh timeout
-
+    # Nhận dạng văn bản trong thread riêng
+    future_text = executor.submit(audio_to_text, audio_path)
+    text = future_text.result(timeout=15)
     if not text:
         return jsonify({"error": "Không thể nhận dạng giọng nói"}), 400
     print(f"📝 Văn bản nhận dạng: {text}")
 
-    # Xử lý Gemini và upload trong thread riêng
-    future_mp3_url = executor.submit(process_with_gemini_and_get_mp3_url, text)
-    mp3_url = future_mp3_url.result(timeout=30)
+    # Tên file mp3 cho kết quả trả lời, đặt khác với file upload audio
+    mp3_filename = os.path.splitext(filename)[0] + "_response.mp3"
+    mp3_path = os.path.join(app.config['UPLOAD_FOLDER'], mp3_filename)
 
-    if not mp3_url:
-        return jsonify({"error": "Không thể tạo file MP3 hoặc upload"}), 500
+    # Tạo file MP3 trong thread riêng
+    future_reply = executor.submit(process_with_gemini_and_save_mp3, text, mp3_path)
+    reply_text = future_reply.result(timeout=30)
+
+    # Tạo URL nội bộ cho file MP3
+    mp3_url = request.host_url + f"uploads/{mp3_filename}"
+    print(f"🌐 URL nội bộ cho file MP3: {mp3_url}")
 
     return jsonify({
         "text": text,
+        "reply_text": reply_text,
         "mp3_url": mp3_url
     })
+
+# === Phục vụ file MP3 và các file trong thư mục uploads ===
+@app.route('/uploads/<path:filename>')
+def serve_uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
