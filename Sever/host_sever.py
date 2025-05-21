@@ -5,10 +5,11 @@ import google.generativeai as genai
 from gtts import gTTS
 import requests
 from werkzeug.utils import secure_filename
+from concurrent.futures import ThreadPoolExecutor
 
 # === Cấu hình ===
-API_KEY = "AIzaSyDvDgIdNi8dsUslAK5yNE5C07nyt2OfBVU"  # ← thay bằng key của bạn
-UPLOAD_FOLDER = "./uploads"
+API_KEY = "YOUR_API_KEY"  
+# UPLOAD_FOLDER = "./uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Cấu hình Gemini
@@ -53,6 +54,8 @@ def process_with_gemini_and_get_mp3_url(prompt, mp3_filename="response.mp3"):
     return None
 
 # === API endpoint ===
+executor = ThreadPoolExecutor(max_workers=2)
+
 @app.route("/upload-audio", methods=["POST"])
 def upload_audio():
     if 'file' not in request.files:
@@ -68,14 +71,18 @@ def upload_audio():
 
     print(f"📥 Nhận file: {filepath}")
 
-    # Chuyển thành văn bản
-    text = audio_to_text(filepath)
+    # Xử lý văn bản trong thread riêng
+    future_text = executor.submit(audio_to_text, filepath)
+    text = future_text.result(timeout=15)  # Có thể điều chỉnh timeout
+
     if not text:
         return jsonify({"error": "Không thể nhận dạng giọng nói"}), 400
     print(f"📝 Văn bản nhận dạng: {text}")
 
-    # Gửi tới Gemini và nhận link âm thanh
-    mp3_url = process_with_gemini_and_get_mp3_url(text)
+    # Xử lý Gemini và upload trong thread riêng
+    future_mp3_url = executor.submit(process_with_gemini_and_get_mp3_url, text)
+    mp3_url = future_mp3_url.result(timeout=30)
+
     if not mp3_url:
         return jsonify({"error": "Không thể tạo file MP3 hoặc upload"}), 500
 
@@ -83,6 +90,5 @@ def upload_audio():
         "text": text,
         "mp3_url": mp3_url
     })
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
