@@ -12,9 +12,9 @@
 #include "mp3dec.h"
 #include "esp_heap_caps.h"
 #include "esp_http_client.h"
-#include "esp_netif.h"  // Thêm thư viện mạng
+#include "esp_netif.h"  
 #include "esp_crt_bundle.h"
-#include "esp_wifi.h"   // Thêm thư viện Wi-Fi
+#include "esp_wifi.h"   
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_netif.h"
