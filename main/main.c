@@ -12,15 +12,12 @@
 #include "mp3dec.h"
 #include "esp_heap_caps.h"
 #include "esp_http_client.h"
-#include "esp_netif.h"  
+#include "esp_netif.h"
+#include "esp_http_server.h"
 #include "esp_crt_bundle.h"
-#include "esp_wifi.h"   
+#include "esp_wifi.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "esp_netif.h"
-#include "text_to_speech.h"
-#include "speech_to_text.h"
-
 #include "esp_timer.h"
 #include "cJSON.h"
 
@@ -30,24 +27,24 @@
 #define PIN_NUM_CS   38
 
 #define BUTTON 3
+#define LED_PIN  2
 
 #define INPUT_BUFFER_SIZE  (8 * 1024)
 #define MAINBUF_SIZE       1152
 #define PCM_BUFFER_SIZE    (MAINBUF_SIZE * 2)
 #define MOUNT_POINT        "/sdcard"
-#define MP3_PATH           MOUNT_POINT"/audio.mp3"
 
 #define I2S_READ_LEN    (1024)
 #define RECORD_TIME_SEC (3)
 #define SAMPLE_RATE     (16000)
 #define SAMPLE_BITS     (I2S_BITS_PER_SAMPLE_16BIT)
 #define WAV_HEADER_SIZE (44)
-#define WAV_FILE_PATH  MOUNT_POINT"/record.wav"
+#define WAV_FILE_PATH   MOUNT_POINT"/record.wav"
 
-static const char *TAG = "MP3Player";
-static FILE *audio_file = NULL;
+static const char *TAG = "MP3Streamer";
 SemaphoreHandle_t xWifiConnected = NULL;
-
+SemaphoreHandle_t xUploadDoneSemaphore = NULL;
+SemaphoreHandle_t xJsonReady = NULL;
 
 // I2S pins
 #define I2S_NUM       I2S_NUM_1
@@ -57,11 +54,26 @@ SemaphoreHandle_t xWifiConnected = NULL;
 #define I2S_DO_PIN    GPIO_NUM_6
 #define VOLUME_MULTIPLIER 3
 
-#define WIFI_SSID "YOUR_SSID"
-#define WIFI_PASS "YOUR_PASSWORD"
-#define SEVER_URL   "YOUR_URL/upload-audio"
+#define WIFI_SSID "SSID"
+#define WIFI_PASS "PASSWORD"
+#define SEVER_URL "http://192.168.0.12:5000/upload-audio"
 
 char recognized_text[512];
+char uploaded_url[512];
+
+
+static volatile bool stop_playback = false;
+static volatile uint64_t last_button_press = 0;
+#define DEBOUNCE_TIME_MS 200 // Thời gian chống rung 200ms
+
+// Hàm xử lý ngắt cho nút bấm
+static void IRAM_ATTR button_isr_handler(void* arg) {
+    uint64_t current_time = esp_timer_get_time() / 1000; // Thời gian tính bằng ms
+    if (current_time - last_button_press > DEBOUNCE_TIME_MS) {
+        stop_playback = true;
+        last_button_press = current_time;
+    }
+}
 
 void button_init() {
     gpio_config_t io_conf = {
@@ -69,75 +81,51 @@ void button_init() {
         .mode = GPIO_MODE_INPUT,
         .pull_up_en = GPIO_PULLUP_ENABLE,
         .pull_down_en = GPIO_PULLDOWN_DISABLE,
-        .intr_type = GPIO_INTR_DISABLE,
+        .intr_type = GPIO_INTR_NEGEDGE, // Ngắt trên cạnh xuống
     };
-    gpio_config(&io_conf);
-}
-
-
-esp_err_t _http_event_handler(esp_http_client_event_t *evt) {
-    switch (evt->event_id) {
-        case HTTP_EVENT_ON_DATA:
-            ESP_LOGI("HTTP", "Receiving data, len=%d", evt->data_len);
-            if (audio_file && evt->data_len > 0) {
-                fwrite(evt->data, 1, evt->data_len, audio_file);
-            }
-            break;
-        case HTTP_EVENT_ON_FINISH:
-            ESP_LOGI("HTTP", "Download finished");
-            if (audio_file) {
-                fclose(audio_file);
-                audio_file = NULL;
-                ESP_LOGI("HTTP", "File closed");
-            }
-            break;
-        default:
-            break;
-    }
-    return ESP_OK;
-}
-
-void download_audio_file(const char *url) {
-    audio_file = fopen(MP3_PATH, "wb");
-    if (!audio_file) {
-        ESP_LOGE("Audio", "Failed to open file for writing");
-        return;
-    }
-
-    esp_http_client_config_t config = {
-        .url = url,
-        .event_handler = _http_event_handler,
-        .crt_bundle_attach = esp_crt_bundle_attach,
-    };
-
-    esp_http_client_handle_t client = esp_http_client_init(&config);
-    esp_err_t err = esp_http_client_perform(client);
-    if (err == ESP_OK) {
-        ESP_LOGI("Audio", "Successfully downloaded file");
-    } else {
-        ESP_LOGE("Audio", "HTTP GET request failed: %s", esp_err_to_name(err));
-    }
-
-    esp_http_client_cleanup(client);
-
-    // Đảm bảo đóng file nếu chưa đóng
-    if (audio_file) {
-        fclose(audio_file);
-        audio_file = NULL;
-    }
+    ESP_ERROR_CHECK(gpio_config(&io_conf));
+    // Cài đặt ISR cho ngắt
+    ESP_ERROR_CHECK(gpio_install_isr_service(ESP_INTR_FLAG_IRAM));
+    ESP_ERROR_CHECK(gpio_isr_handler_add(BUTTON, button_isr_handler, NULL));
 }
 
 void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data) {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
+        ESP_LOGI(TAG, "Wi-Fi STA started, attempting to connect...");
         esp_wifi_connect();
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
+        ESP_LOGW(TAG, "Wi-Fi STA disconnected, retrying connection...");
         esp_wifi_connect();
     } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
+        ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
+        ESP_LOGI(TAG, "Wi-Fi connected, IP obtained: %s", ip4addr_ntoa(&event->ip_info.ip));
         if (xWifiConnected) xSemaphoreGive(xWifiConnected);
     }
 }
 
-// Wi-Fi setup
+// Hàm điều khiển LED
+void control_led(const char* recognized_text) {
+    // Tạo bản sao của chuỗi để xử lý
+    char text_copy[64]; // Buffer đủ lớn để chứa chuỗi
+    strncpy(text_copy, recognized_text, sizeof(text_copy) - 1);
+    text_copy[sizeof(text_copy) - 1] = '\0'; // Đảm bảo kết thúc chuỗi
+
+
+    // Khởi tạo GPIO cho LED
+    gpio_reset_pin(LED_PIN);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
+
+    // So sánh chuỗi bằng strcmp
+    if (strcmp(text_copy, "bật đèn") == 0) {
+        printf(text_copy);
+        gpio_set_level(LED_PIN, 1); // Bật LED
+    }
+    if (strcmp(text_copy, "tắt đèn") == 0) {
+        printf(text_copy);
+        gpio_set_level(LED_PIN, 0); // Tắt LED
+    }
+}
+
 void wifi_init() {
     nvs_flash_init();
     esp_netif_init();
@@ -163,10 +151,10 @@ void wifi_init() {
 void i2s_init(void) {
     i2s_config_t cfg = {
         .mode                = I2S_MODE_MASTER | I2S_MODE_TX,
-        .sample_rate         = 44100,  // overridden by first MP3 frame
+        .sample_rate         = 44100,
         .bits_per_sample     = I2S_BITS_PER_SAMPLE_16BIT,
         .channel_format      = I2S_CHANNEL_FMT_RIGHT_LEFT,
-        .communication_format= I2S_COMM_FORMAT_I2S_MSB,
+        .communication_format = I2S_COMM_FORMAT_I2S_MSB,
         .dma_buf_count       = 8,
         .dma_buf_len         = 1024,
         .use_apll            = false,
@@ -178,9 +166,9 @@ void i2s_init(void) {
         .data_in_num  = I2S_PIN_NO_CHANGE
     };
     ESP_ERROR_CHECK(i2s_driver_install(I2S_NUM, &cfg, 0, NULL));
-    
     ESP_ERROR_CHECK(i2s_set_pin(I2S_NUM, &pins));
 }
+
 void init_i2s_mic(void) {
     i2s_config_t i2s_config = {
         .mode = I2S_MODE_MASTER | I2S_MODE_RX,
@@ -207,6 +195,7 @@ void init_i2s_mic(void) {
     i2s_set_pin(I2S_NUM_MIC, &pin_config);
     i2s_zero_dma_buffer(I2S_NUM_MIC);
 }
+
 void sd_card_init(void) {
     sdmmc_host_t host = SDSPI_HOST_DEFAULT();
     spi_bus_config_t bus = {
@@ -235,45 +224,49 @@ void sd_card_init(void) {
 void amplify_audio(int16_t *pcm_buf, size_t frame_size) {
     for (size_t i = 0; i < frame_size; i++) {
         pcm_buf[i] = (int16_t)(pcm_buf[i] * VOLUME_MULTIPLIER);
-        // Giới hạn giá trị để tránh tràn
         if (pcm_buf[i] > 32767) pcm_buf[i] = 32767;
         if (pcm_buf[i] < -32768) pcm_buf[i] = -32768;
     }
 }
 
-void play_mp3(const char *path) {
-    FILE *f = fopen(path, "rb");
-    if (!f) {
-        ESP_LOGE(TAG, "Open %s failed", path);
+void stream_and_play_mp3(const char *url) {
+    stop_playback = false;
+    esp_http_client_config_t config = {
+        .url = url,
+        .crt_bundle_attach = esp_crt_bundle_attach,
+        .timeout_ms = 60000,
+        .buffer_size = 8192,  // Tăng kích thước bộ đệm
+        .buffer_size_tx = 4096,
+    };
+    esp_http_client_handle_t client = esp_http_client_init(&config);
+    esp_http_client_set_method(client, HTTP_METHOD_GET);
+    esp_http_client_set_header(client, "Accept", "audio/mpeg");
+    esp_err_t err = esp_http_client_open(client, 0);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+        esp_http_client_cleanup(client);
         return;
     }
-
-    char id3_header[10];
-    if (fread(id3_header, 1, 10, f) == 10) {
-        if (memcmp(id3_header, "ID3", 3) == 0) {
-            // ID3v2 tag found, calculate size
-            int tag_size = ((id3_header[6] & 0x7F) << 21) |
-                           ((id3_header[7] & 0x7F) << 14) |
-                           ((id3_header[8] & 0x7F) << 7)  |
-                           (id3_header[9] & 0x7F);
-            fseek(f, tag_size, SEEK_CUR);  // Skip over the tag
-            ESP_LOGI(TAG, "Skipped ID3v2 tag of %d bytes", tag_size + 10);
-        } else {
-            rewind(f);  // Not an ID3 tag, rewind to beginning
-        }
+    int content_length = esp_http_client_fetch_headers(client);
+    if (content_length < 0) {
+        ESP_LOGE(TAG, "Failed to fetch headers");
+        esp_http_client_close(client);
+        esp_http_client_cleanup(client);
+        return;
     }
 
     HMP3Decoder dec = MP3InitDecoder();
     if (!dec) {
         ESP_LOGE(TAG, "MP3InitDecoder failed");
-        fclose(f);
+        esp_http_client_close(client);
+        esp_http_client_cleanup(client);
         return;
     }
 
-    uint8_t *in_buf  = heap_caps_malloc(INPUT_BUFFER_SIZE, MALLOC_CAP_DEFAULT);
+    uint8_t *in_buf = heap_caps_malloc(INPUT_BUFFER_SIZE, MALLOC_CAP_DEFAULT);
     int16_t *pcm_buf = heap_caps_malloc(PCM_BUFFER_SIZE * sizeof(int16_t), MALLOC_CAP_DMA);
     if (!in_buf || !pcm_buf) {
-        ESP_LOGE(TAG, "Buffer alloc failed: in_buf=%p, pcm_buf=%p", in_buf, pcm_buf);
+        ESP_LOGE(TAG, "Buffer alloc failed");
         goto CLEAN;
     }
 
@@ -283,74 +276,83 @@ void play_mp3(const char *path) {
     bool first_frame = true;
     bool eof = false;
 
-    while (!eof || bytes_left > 0) {
-        // Refill buffer if needed
-        if (bytes_left < MAINBUF_SIZE && !eof) {
-            if (bytes_left > 0) memmove(in_buf, read_ptr, bytes_left);
-            read_ptr = in_buf;
-            int r = fread(in_buf + bytes_left, 1, INPUT_BUFFER_SIZE - bytes_left, f);
-            if (r <= 0) {
-                eof = true;
-            } else {
-                bytes_left += r;
-            }
+    // Skip ID3 tags if present
+    char id3_header[10];
+    int bytes_read = esp_http_client_read(client, id3_header, 10);
+    if (bytes_read == 10 && memcmp(id3_header, "ID3", 3) == 0) {
+        int tag_size = ((id3_header[6] & 0x7F) << 21) |
+                       ((id3_header[7] & 0x7F) << 14) |
+                       ((id3_header[8] & 0x7F) << 7)  |
+                       (id3_header[9] & 0x7F);
+        ESP_LOGI(TAG, "Skipping ID3v2 tag of %d bytes", tag_size + 10);
+        char *temp_buf = heap_caps_malloc(tag_size, MALLOC_CAP_DEFAULT);
+        if (temp_buf) {
+            esp_http_client_read(client, temp_buf, tag_size);
+            heap_caps_free(temp_buf);
         }
-
-        // Decode one MP3 frame
-        int err = MP3Decode(dec, &read_ptr, &bytes_left, pcm_buf, 0);
-        if (err == ERR_MP3_NONE) {
-            MP3GetLastFrameInfo(dec, &frameInfo);
-            if (first_frame) {
-                ESP_LOGI(TAG, "MP3 sample rate: %d, channels: %d", frameInfo.samprate, frameInfo.nChans);
-                i2s_set_clk(I2S_NUM,
-                            frameInfo.samprate / 2,  // hoặc giữ nguyên nếu bạn đã xử lý tốc độ
-                            I2S_BITS_PER_SAMPLE_16BIT,
-                            (frameInfo.nChans == 1)
-                                ? I2S_CHANNEL_FMT_ONLY_LEFT
-                                : I2S_CHANNEL_FMT_RIGHT_LEFT);
-                first_frame = false;
-                
-                continue;
-            }
-            // Bắt đầu phát từ khung thứ 2 trở đi
-            size_t out_bytes = frameInfo.outputSamps * sizeof(int16_t);
-            size_t written = 0;
-            amplify_audio(pcm_buf, frameInfo.outputSamps);
-            ESP_ERROR_CHECK(i2s_write(I2S_NUM, pcm_buf, out_bytes, &written, portMAX_DELAY));
-        }
-        else if (err == ERR_MP3_INDATA_UNDERFLOW) {
-            if (eof && bytes_left == 0) {
-                break;  // Đã hết sạch dữ liệu và decoder không còn gì để giải mã
-            }
-            if (bytes_left > 0) {
-                read_ptr++;
-                bytes_left--;
-            }
-            continue;
-        } else if (err == ERR_MP3_INVALID_FRAMEHEADER) {
-            // Skip bad header
-            if (bytes_left > 0) {
-                read_ptr++;
-                bytes_left--;
-            }
-            continue;
-        } else {
-            break; 
-        }
+    } else {
+        memcpy(in_buf, id3_header, bytes_read);
+        bytes_left = bytes_read;
+        read_ptr = in_buf;
     }
 
-    // Đợi một thời gian để dữ liệu phát xong
-    vTaskDelay(500 / portTICK_PERIOD_MS);  // wait 500ms or adjust based on your data rate
+    while (!eof && !stop_playback) {
+        if (bytes_left < MAINBUF_SIZE) {
+            if (bytes_left > 0) {
+                memmove(in_buf, read_ptr, bytes_left);
+                read_ptr = in_buf;
+            }
+            int r = esp_http_client_read(client, (char *)in_buf + bytes_left, INPUT_BUFFER_SIZE - bytes_left);
+            if (r > 0) {
+                bytes_left += r;
+            } else if (r == 0) {
+                eof = true;
+            } else {
+                ESP_LOGE(TAG, "HTTP read error");
+                break;
+            }
+        }
 
-    // Clear DMA buffer to avoid replay
-    i2s_zero_dma_buffer(I2S_NUM);
-
+        if (bytes_left > 0) {
+            int err = MP3Decode(dec, &read_ptr, &bytes_left, pcm_buf, 0);
+            if (err == ERR_MP3_NONE) {
+                MP3GetLastFrameInfo(dec, &frameInfo);
+                if (first_frame) {
+                    ESP_LOGI(TAG, "MP3 sample rate: %d, channels: %d", frameInfo.samprate, frameInfo.nChans);
+                    i2s_set_clk(I2S_NUM, frameInfo.samprate / 2, I2S_BITS_PER_SAMPLE_16BIT, frameInfo.nChans == 1 ? I2S_CHANNEL_FMT_ONLY_LEFT : I2S_CHANNEL_FMT_RIGHT_LEFT);
+                    first_frame = false;
+                }
+                size_t out_bytes = frameInfo.outputSamps * sizeof(int16_t);
+                amplify_audio(pcm_buf, frameInfo.outputSamps);
+                size_t written = 0;
+                ESP_ERROR_CHECK(i2s_write(I2S_NUM, pcm_buf, out_bytes, &written, portMAX_DELAY));
+            } else if (err == ERR_MP3_INDATA_UNDERFLOW) {
+                continue;
+            } else if (err == ERR_MP3_INVALID_FRAMEHEADER) {
+                ESP_LOGW(TAG, "Invalid frame header, skipping...");
+                if (bytes_left > 0) {
+                    read_ptr++;
+                    bytes_left--;
+                }
+                continue;
+            } else {
+                ESP_LOGE(TAG, "MP3Decode error: %d", err);
+                break;
+            }
+        }
+    }
+    if (stop_playback) {
+        ESP_LOGI(TAG, "Playback stopped due to button interrupt");
+    }
+    vTaskDelay(pdMS_TO_TICKS(500));
 CLEAN:
-    if (in_buf)  heap_caps_free(in_buf);
+    if (in_buf) heap_caps_free(in_buf);
     if (pcm_buf) heap_caps_free(pcm_buf);
     MP3FreeDecoder(dec);
-    fclose(f);
-    ESP_LOGI(TAG, "Playback finished"); 
+    esp_http_client_close(client);
+    esp_http_client_cleanup(client);
+    i2s_zero_dma_buffer(I2S_NUM);
+    ESP_LOGI(TAG, "Streaming finished");
 }
 
 void write_wav_header(FILE *f, int sample_rate, int bits_per_sample, int channels, int data_len) {
@@ -374,12 +376,10 @@ void write_wav_header(FILE *f, int sample_rate, int bits_per_sample, int channel
 
     fwrite(header, 1, WAV_HEADER_SIZE, f);
 }
-/*-------------------- HTTP Event --------------------*/
-static esp_err_t upload_event_handler(esp_http_client_event_t *evt)
-{
+
+static esp_err_t upload_event_handler(esp_http_client_event_t *evt) {
     switch(evt->event_id) {
         case HTTP_EVENT_ON_DATA:
-            //printf("%.*s", evt->data_len, (char*)evt->data);
             break;
         default:
             break;
@@ -387,10 +387,7 @@ static esp_err_t upload_event_handler(esp_http_client_event_t *evt)
     return ESP_OK;
 }
 
-/*-------------------- Upload File --------------------*/
-static void upload_wav_task(void *pv)
-{
-    // Mở file WAV
+static void upload_wav_task(void *pv) {
     FILE *f = fopen(WAV_FILE_PATH, "rb");
     if (!f) {
         ESP_LOGE(TAG, "Không mở được file: %s", WAV_FILE_PATH);
@@ -401,7 +398,6 @@ static void upload_wav_task(void *pv)
     size_t file_size = ftell(f);
     fseek(f, 0, SEEK_SET);
 
-    // Chuẩn bị multipart header/footer
     const char *boundary = "ESP32Boundary";
     char header[256];
     int header_len = snprintf(header, sizeof(header),
@@ -415,32 +411,26 @@ static void upload_wav_task(void *pv)
 
     size_t total_len = header_len + file_size + footer_len;
 
-    // Cấu hình HTTP client
     esp_http_client_config_t config = {
         .url = SEVER_URL,
         .method = HTTP_METHOD_POST,
         .event_handler = upload_event_handler,
         .crt_bundle_attach = esp_crt_bundle_attach,
-        .timeout_ms = 10000,
+        .timeout_ms = 20000,
         .buffer_size = 1024,
     };
     esp_http_client_handle_t client = esp_http_client_init(&config);
 
-    // Headers cần thiết
     char content_type_header[64];
     snprintf(content_type_header, sizeof(content_type_header),
              "multipart/form-data; boundary=%s", boundary);
     esp_http_client_set_header(client, "Content-Type", content_type_header);
-    esp_http_client_set_header(client, "Content-Length",
-                               (char[]){0}); // sẽ dùng esp_http_client_open
+    esp_http_client_set_header(client, "Content-Length", (char[]){0});
 
-    // Mở kết nối với server (chunked theo total_len)
     esp_http_client_open(client, total_len);
 
-    // Gửi header
     esp_http_client_write(client, header, header_len);
 
-    // Gửi dữ liệu file theo chunk
     const size_t CHUNK_SIZE = 1024;
     uint8_t buf[CHUNK_SIZE];
     size_t read_bytes;
@@ -449,40 +439,33 @@ static void upload_wav_task(void *pv)
     }
     fclose(f);
 
-    // Gửi footer
     esp_http_client_write(client, footer, footer_len);
 
-    // Nhận response
     esp_http_client_fetch_headers(client);
     int status = esp_http_client_get_status_code(client);
-    //ESP_LOGI(TAG, "Upload HTTP status: %d", status);
 
-    // Đọc và in ra nội dung response
     char *resp = malloc(1024);
     int len = esp_http_client_read_response(client, resp, 1024);
     if (len > 0) {
         resp[len] = '\0';
-        //ESP_LOGI(TAG, "Response: %s", resp);
-    
         cJSON *root = cJSON_Parse(resp);
-                if (root) {
+        if (root) {
             cJSON *error = cJSON_GetObjectItem(root, "error");
             if (error && cJSON_IsString(error)) {
                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
             } else {
-                // Nếu không có lỗi, lấy text và mp3_url từ response
                 cJSON *text = cJSON_GetObjectItem(root, "text");
                 if (text && cJSON_IsString(text)) {
                     strncpy(recognized_text, text->valuestring, sizeof(recognized_text) - 1);
                     ESP_LOGI(TAG, "Văn bản nhận dạng: %s", recognized_text);
+                    control_led(recognized_text);
                 }
 
                 cJSON *mp3_url = cJSON_GetObjectItem(root, "mp3_url");
                 if (mp3_url && cJSON_IsString(mp3_url)) {
                     strncpy(uploaded_url, mp3_url->valuestring, sizeof(uploaded_url) - 1);
                     ESP_LOGI(TAG, "✅ File MP3 URL: %s", uploaded_url);
-                    download_audio_file(uploaded_url);
-                    play_mp3(MP3_PATH);
+                    stream_and_play_mp3(uploaded_url);
                     xSemaphoreGive(xUploadDoneSemaphore);
                 } else {
                     ESP_LOGW(TAG, "Không tìm thấy mp3_url trong JSON.");
@@ -497,39 +480,32 @@ static void upload_wav_task(void *pv)
 
     esp_http_client_close(client);
     esp_http_client_cleanup(client);
-
-
     vTaskDelete(NULL);
 }
 
-
-void mp3_task(void *arg) {
-    play_mp3(MP3_PATH);
-    vTaskDelete(NULL);
-}
-
-void app_main(void)
-{
-    // 1) Delay để ổn định hệ thống
+void app_main(void) {
     vTaskDelay(pdMS_TO_TICKS(2000));
+
     esp_log_level_set("esp-x509-crt-bundle", ESP_LOG_WARN);
 
-    // 2) Khởi tạo NVS
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
+
     xWifiConnected = xSemaphoreCreateBinary();
     xUploadDoneSemaphore = xSemaphoreCreateBinary();
     xJsonReady = xSemaphoreCreateBinary();
-    // 4) Khởi tạo I2S và SD‑card
+
     button_init();
     i2s_init();
-    init_i2s_mic(); 
+    init_i2s_mic();
     sd_card_init();
-    // 3) Kết nối Wi‑Fi
+
+    ESP_LOGI(TAG, "Starting application...");
+
     wifi_init();
     if (xSemaphoreTake(xWifiConnected, pdMS_TO_TICKS(10000)) == pdTRUE) {
         while (1) {
@@ -540,13 +516,12 @@ void app_main(void)
                     ESP_LOGE(TAG, "Failed to open file for writing");
                     return;
                 }
-            
-                // Ghi header tạm thời với kích thước dữ liệu là 0
-                 write_wav_header(wav_file, SAMPLE_RATE, 16, 1, 0);
-            
+
+                write_wav_header(wav_file, SAMPLE_RATE, 16, 1, 0);
+
                 int32_t *i2s_read_buff = (int32_t*) malloc(I2S_READ_LEN);
-                int16_t *wav_write_buff = (int16_t*) malloc(I2S_READ_LEN / 2); // Mỗi mẫu 2 byte
-            
+                int16_t *wav_write_buff = (int16_t*) malloc(I2S_READ_LEN / 2);
+
                 if (!i2s_read_buff || !wav_write_buff) {
                     ESP_LOGE(TAG, "Malloc buffer failed");
                     fclose(wav_file);
@@ -554,45 +529,38 @@ void app_main(void)
                     free(wav_write_buff);
                     return;
                 }
-            
+
                 int total_bytes_written = 0;
                 size_t bytes_read;
-            
+
                 while (gpio_get_level(BUTTON) == 0) {
                     i2s_read(I2S_NUM_MIC, (void*)i2s_read_buff, I2S_READ_LEN, &bytes_read, portMAX_DELAY);
                     int n_samples = bytes_read / 4;
-            
+
                     for (int j = 0; j < n_samples; j++) {
                         wav_write_buff[j] = i2s_read_buff[j] >> 14;
                     }
-            
+
                     fwrite(wav_write_buff, sizeof(int16_t), n_samples, wav_file);
                     total_bytes_written += n_samples * sizeof(int16_t);
                 }
-            
-                // Cập nhật header với kích thước thực tế
-                fseek(wav_file, 4, SEEK_SET); // Di chuyển đến byte 4 (ChunkSize)
+
+                fseek(wav_file, 4, SEEK_SET);
                 int chunk_size = 36 + total_bytes_written;
                 fwrite(&chunk_size, sizeof(int), 1, wav_file);
-            
-                fseek(wav_file, 40, SEEK_SET); // Di chuyển đến byte 40 (Subchunk2Size)
+
+                fseek(wav_file, 40, SEEK_SET);
                 fwrite(&total_bytes_written, sizeof(int), 1, wav_file);
-            
+
                 fclose(wav_file);
                 ESP_LOGI(TAG, "Recording done. Bytes = %d", total_bytes_written);
                 free(i2s_read_buff);
                 free(wav_write_buff);
                 xTaskCreate(upload_wav_task, "upload_wav", 8192, NULL, 5, NULL);
-                
-                
-                
             }
-            vTaskDelay(pdMS_TO_TICKS(100)); 
+            vTaskDelay(pdMS_TO_TICKS(100));
         }
-            
-        
     } else {
         ESP_LOGE("Wi-Fi", "Không kết nối Wi-Fi.");
     }
 }
-
