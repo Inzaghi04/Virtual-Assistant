@@ -1,0 +1,177 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x28 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x178c
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xcb8
+load:0x403cb700,len:0x2db0
+entry 0x403c8914
+[0;32mI (27) boot: ESP-IDF v5.3.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Jun 20 2025 18:02:16[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v0.2[0m
+[0;32mI (34) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (39) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (44) boot.esp32s3: SPI Flash Size : 16MB[0m
+[0;32mI (49) boot: Enabling RNG early entropy source...[0m
+[0;32mI (54) boot: Partition Table:[0m
+[0;32mI (58) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (65) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (72) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (80) boot:  2 factory          factory app      00 00 00010000 00177000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3c0c0020 size=41b60h (269152) map[0m
+[0;32mI (148) esp_image: segment 1: paddr=00051b88 vaddr=3fc9ba00 size=04d7ch ( 19836) load[0m
+[0;32mI (153) esp_image: segment 2: paddr=0005690c vaddr=40374000 size=0970ch ( 38668) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=bda5ch (776796) map[0m
+[0;32mI (302) esp_image: segment 4: paddr=0011da84 vaddr=4037d70c size=0e28ch ( 57996) load[0m
+[0;32mI (325) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (325) boot: Disabling RNG early entropy source...[0m
+[0;32mI (337) cpu_start: Multicore app[0m
+[0;32mI (346) cpu_start: Pro cpu start user code[0m
+[0;32mI (346) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (346) app_init: Application information:[0m
+[0;32mI (349) app_init: Project name:     main[0m
+[0;32mI (354) app_init: App version:      66ad460-dirty[0m
+[0;32mI (359) app_init: Compile time:     Jun 20 2025 18:01:56[0m
+[0;32mI (365) app_init: ELF file SHA256:  fb8e03c86...[0m
+[0;32mI (370) app_init: ESP-IDF:          v5.3.1-dirty[0m
+[0;32mI (376) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (380) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (385) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (390) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (397) heap_init: At 3FCA51A8 len 00044568 (273 KiB): RAM[0m
+[0;32mI (403) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (410) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (416) heap_init: At 600FE100 len 00001EE8 (7 KiB): RTCRAM[0m
+[0;32mI (423) spi_flash: detected chip: boya[0m
+[0;32mI (426) spi_flash: flash io: dio[0m
+[0;33mW (430) i2s(legacy): legacy i2s driver is deprecated, please migrate to use driver/i2s_std.h, driver/i2s_pdm.h or driver/i2s_tdm.h[0m
+[0;32mI (443) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (450) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (457) main_task: Started on CPU0[0m
+[0;32mI (477) main_task: Calling app_main()[0m
+[0;32mI (2497) gpio: GPIO[3]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:2 [0m
+[0;32mI (2497) gpio: GPIO[38]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (2547) sdspi_transaction: cmd=52, R1 response: command not supported[0m
+[0;32mI (2667) sdspi_transaction: cmd=5, R1 response: command not supported[0m
+[0;32mI (2727) SDCard: SD card mounted[0m
+[0;32mI (2727) pp: pp rom version: e7ae62f[0m
+[0;32mI (2727) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (2737) wifi:wifi driver task: 3fcc4410, prio:23, stack:6656, core=0[0m
+[0;32mI (2747) wifi:wifi firmware version: ccaebfa[0m
+[0;32mI (2747) wifi:wifi certification version: v7.0[0m
+[0;32mI (2747) wifi:config NVS flash: enabled[0m
+[0;32mI (2747) wifi:config nano formating: disabled[0m
+[0;32mI (2747) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (2757) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (2757) wifi:Init management short buffer num: 32[0m
+[0;32mI (2767) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (2767) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (2777) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (2777) wifi:Init static rx buffer num: 10[0m
+[0;32mI (2777) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (2787) wifi_init: rx ba win: 6[0m
+[0;32mI (2787) wifi_init: accept mbox: 6[0m
+[0;32mI (2797) wifi_init: tcpip mbox: 32[0m
+[0;32mI (2797) wifi_init: udp mbox: 6[0m
+[0;32mI (2797) wifi_init: tcp mbox: 6[0m
+[0;32mI (2807) wifi_init: tcp tx win: 5760[0m
+[0;32mI (2807) wifi_init: tcp rx win: 5760[0m
+[0;32mI (2817) wifi_init: tcp mss: 1440[0m
+[0;32mI (2817) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (2827) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (2827) phy_init: phy_version 680,a6008b2,Jun  4 2024,16:41:10[0m
+[0;32mI (2867) wifi:mode : softAP (94:a9:90:28:d6:ed)[0m
+[0;32mI (2877) wifi:Total power save buffer number: 16[0m
+[0;32mI (2877) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (2877) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (2877) WiFiSetup: Access Point started. Connect to SSID: ESP32-Setup[0m
+[0;32mI (2877) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1[0m
+[0;32mI (2897) WiFiSetup: HTTP Server started[0m
+[0;32mI (25337) wifi:new:<1,0>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (25337) wifi:station: 76:65:54:5e:d6:93 join, AID=1, bgn, 20[0m
+[0;32mI (25367) WiFiSetup: Station connected to AP[0m
+[0;32mI (25377) wifi:<ba-add>idx:2 (ifx:1, 76:65:54:5e:d6:93), tid:0, ssn:0, winSize:64[0m
+[0;32mI (25517) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2[0m
+[0;33mW (48777) httpd_uri: httpd_uri: URI '/favicon.ico' not found[0m
+[0;33mW (48777) httpd_txrx: httpd_resp_send_err: 404 Not Found - Nothing matches the given URI[0m
+[0;32mI (66557) WiFiSetup: Received SSID: Van Vuong, PASS: n06111977, Server URL: http://192.168.1.8:5000/upload-audio[0m
+[0;32mI (66557) wifi:mode : sta (94:a9:90:28:d6:ec) + softAP (94:a9:90:28:d6:ed)[0m
+[0;32mI (66557) wifi:enable tsf[0m
+[0;33mW (66577) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (66577) WiFiSetup: WiFi STA started, connecting...[0m
+[1;31mE (66577) wifi:sta is connecting, return error[0m
+[0;32mI (66587) wifi:primary chan differ, old=1, new=11, start CSA timer[0m
+[0;32mI (66987) wifi:switch to channel 11[0m
+[0;32mI (66987) wifi:ap channel adjust o:1,1 n:11,2[0m
+[0;32mI (66987) wifi:new:<11,0>, old:<1,0>, ap:<11,2>, sta:<0,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (66997) wifi:new:<11,2>, old:<11,0>, ap:<11,2>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (66997) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (67007) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (67017) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (67017) wifi:<ba-add>idx:0 (ifx:0, a0:65:18:c4:b3:8d), tid:0, ssn:0, winSize:64[0m
+[0;32mI (67037) wifi:connected with Van Vuong, aid = 5, channel 11, BW20, bssid = a0:65:18:c4:b3:8d[0m
+[0;32mI (67037) wifi:security: WPA2-PSK, phy: bgn, rssi: -65[0m
+[0;32mI (67047) wifi:pm start, type: 1[0m
+
+[0;32mI (67047) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (67047) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (67057) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (68067) esp_netif_handlers: sta ip: 192.168.1.5, mask: 255.255.255.0, gw: 192.168.1.1[0m
+[0;32mI (68067) WiFiSetup: Got IP address: 192.168.1.5[0m
+[0;32mI (72867) MP3Streamer: Start recording...[0m
+[0;32mI (74157) MP3Streamer: Recording done. Bytes = 43008[0m
+[0;32mI (84367) MP3Streamer: Văn bản nhận dạng: alo[0m
+[0;32mI (84367) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (84377) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (84427) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (100017) MP3Streamer: Streaming finished[0m
+[0;32mI (104637) MP3Streamer: Start recording...[0m
+[0;32mI (105687) MP3Streamer: Recording done. Bytes = 36864[0m
+[0;32mI (111817) MP3Streamer: Văn bản nhận dạng: chào[0m
+[0;32mI (111817) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (111817) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (111897) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (121617) MP3Streamer: Streaming finished[0m
+[0;32mI (123487) MP3Streamer: Start recording...[0m
+[0;32mI (125377) MP3Streamer: Recording done. Bytes = 63488[0m
+[0;32mI (132937) MP3Streamer: Văn bản nhận dạng: xin chào[0m
+[0;32mI (132937) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (132937) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (133067) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (141837) MP3Streamer: Streaming finished[0m
+[0;32mI (149667) MP3Streamer: Start recording...[0m
+[0;32mI (151337) MP3Streamer: Recording done. Bytes = 57344[0m
+[0;32mI (158207) MP3Streamer: Văn bản nhận dạng: chào bạn[0m
+[0;32mI (158207) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (158207) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (158277) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (166447) MP3Streamer: Streaming finished[0m
+[0;32mI (176367) MP3Streamer: Start recording...[0m
+[0;32mI (176527) MP3Streamer: Recording done. Bytes = 8192[0m
+[0;32mI (177967) MP3Streamer: Văn bản nhận dạng: Không nhận diện được[0m
+[0;32mI (177967) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (177967) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (178387) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (179477) MP3Streamer: Start recording...[0m
+[0;32mI (179657) MP3Streamer: Streaming finished[0m
+[0;32mI (180167) MP3Streamer: Recording done. Bytes = 26624[0m
+[0;32mI (180667) MP3Streamer: Start recording...[0m
+[0;32mI (181257) MP3Streamer: Recording done. Bytes = 12288[0m
+[0;32mI (182787) MP3Streamer: Văn bản nhận dạng: Không nhận diện được[0m
+[0;32mI (182787) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (182787) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (182857) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (183117) MP3Streamer: Playback stopped due to button interrupt[0m
+[0;32mI (183177) MP3Streamer: Start recording...[0m
+[0;32mI (183617) MP3Streamer: Streaming finished[0m
+[0;32mI (184197) MP3Streamer: Recording done. Bytes = 36864[0m
+[0;32mI (187997) MP3Streamer: Văn bản nhận dạng: Không nhận diện được[0m
+[0;32mI (187997) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (188007) MP3Streamer: ✅ File MP3 URL: http://192.168.1.8:5000/uploads/record_response.mp3[0m
+[0;32mI (188077) MP3Streamer: MP3 sample rate: 24000, channels: 1[0m
+[0;32mI (189357) MP3Streamer: Streaming finished[0m
+[0;33mW (201027) HTTP_CLIENT: Connection timed out before data was ready![0m

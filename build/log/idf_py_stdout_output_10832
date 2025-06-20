@@ -1,0 +1,118 @@
+[1/13] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D C:\esp\CompleteCopy\build\bootloader\esp-idf\esptool_py && C:\esp\Espressif\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/esp/CompleteCopy/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5260 bytes. 0x2da0 bytes (36%) free.
+[2/11] Building C object esp-idf/sd_card/CMakeFiles/__idf_sd_card.dir/sd_card.c.obj
+[3/11] Linking C static library esp-idf\sd_card\libsd_card.a
+[4/11] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+In file included from C:/esp/CompleteCopy/main/main.c:5:
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/driver/i2s.h:27:2: warning: #warning "This set of I2S APIs has been deprecated, please include 'driver/i2s_std.h', 'driver/i2s_pdm.h' or 'driver/i2s_tdm.h' instead. if you want to keep using the old APIs and ignore this warning, you can enable 'Suppress legacy driver deprecated warning' option under 'I2S Configuration' menu in Kconfig" [-Wcpp]
+   27 | #warning "This set of I2S APIs has been deprecated, \
+      |  ^~~~~~~
+C:/esp/CompleteCopy/main/main.c:30: warning: "MAINBUF_SIZE" redefined
+   30 | #define MAINBUF_SIZE       1152
+      | 
+In file included from C:/esp/CompleteCopy/main/main.c:12:
+C:/esp/CompleteCopy/components/helix_mp3_decoder/include/mp3dec.h:76: note: this is the location of the previous definition
+   76 | #define MAINBUF_SIZE    1940
+      | 
+C:/esp/CompleteCopy/main/main.c: In function 'amplify_audio':
+C:/esp/CompleteCopy/main/main.c:377:24: warning: comparison is always false due to limited range of data type [-Wtype-limits]
+  377 |         if (pcm_buf[i] > 32767) pcm_buf[i] = 32767;
+      |                        ^
+C:/esp/CompleteCopy/main/main.c:378:24: warning: comparison is always false due to limited range of data type [-Wtype-limits]
+  378 |         if (pcm_buf[i] < -32768) pcm_buf[i] = -32768;
+      |                        ^
+C:/esp/CompleteCopy/main/main.c: In function 'upload_wav_task':
+C:/esp/CompleteCopy/main/main.c:594:9: warning: unused variable 'status' [-Wunused-variable]
+  594 |     int status = esp_http_client_get_status_code(client);
+      |         ^~~~~~
+[5/11] Linking C static library esp-idf\main\libmain.a
+[6/11] Generating ld/sections.ld
+[7/11] Building C object CMakeFiles/main.elf.dir/project_elf_src_esp32s3.c.obj
+[8/11] Linking CXX executable main.elf
+[9/11] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated C:/esp/CompleteCopy/build/main.bin
+[10/11] cmd.exe /C "cd /D C:\esp\CompleteCopy\build\esp-idf\esptool_py && C:\esp\Espressif\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app C:/esp/CompleteCopy/build/partition_table/partition-table.bin C:/esp/CompleteCopy/build/main.bin"
+main.bin binary size 0x11bd20 bytes. Smallest app partition is 0x177000 bytes. 0x5b2e0 bytes (24%) free.
+[10/11] cmd.exe /C "cd /D C:\esp\Espressif\frameworks\esp-idf-v5.3.1\components\esptool_py && C:\esp\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/esp/Espressif/frameworks/esp-idf-v5.3.1 -D SERIAL_TOOL=C:/esp/Espressif/python_env/idf5.3_py3.11_env/Scripts/python.exe;;C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_resptool.py --chip esp32s3 -p COM3 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 16MB 0x0 bootloader/bootloader.bin 0x10000 main.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.8.1
+Serial port COM3
+Connecting.....
+Chip is ESP32-S3 (QFN56) (revision v0.2)
+Features: WiFi, BLE, Embedded PSRAM 8MB (AP_3v3)
+Crystal is 40MHz
+MAC: 94:a9:90:28:d6:ec
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00000000 to 0x00005fff...
+Flash will be erased from 0x00010000 to 0x0012bfff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+SHA digest in image updated
+Compressed 21088 bytes to 13052...
+Writing at 0x00000000... (100 %)
+Wrote 21088 bytes (13052 compressed) at 0x00000000 in 0.7 seconds (effective 227.9 kbit/s)...
+Hash of data verified.
+Compressed 1162528 bytes to 727066...
+Writing at 0x00010000... (2 %)
+Writing at 0x0001dc4e... (4 %)
+Writing at 0x0002a979... (6 %)
+Writing at 0x000308a8... (8 %)
+Writing at 0x000356d5... (11 %)
+Writing at 0x0003a8cc... (13 %)
+Writing at 0x0004116c... (15 %)
+Writing at 0x00045dd0... (17 %)
+Writing at 0x0004cfcd... (20 %)
+Writing at 0x00058284... (22 %)
+Writing at 0x0005de5d... (24 %)
+Writing at 0x000640a7... (26 %)
+Writing at 0x0006a636... (28 %)
+Writing at 0x0007014d... (31 %)
+Writing at 0x00076680... (33 %)
+Writing at 0x0007cae1... (35 %)
+Writing at 0x00082d90... (37 %)
+Writing at 0x00088e16... (40 %)
+Writing at 0x0008eb52... (42 %)
+Writing at 0x000949c8... (44 %)
+Writing at 0x0009afe5... (46 %)
+Writing at 0x000a0e6d... (48 %)
+Writing at 0x000a69cd... (51 %)
+Writing at 0x000ab86f... (53 %)
+Writing at 0x000b0b2c... (55 %)
+Writing at 0x000b5ad8... (57 %)
+Writing at 0x000bae48... (60 %)
+Writing at 0x000c00c6... (62 %)
+Writing at 0x000c53af... (64 %)
+Writing at 0x000cb853... (66 %)
+Writing at 0x000d13bd... (68 %)
+Writing at 0x000d7139... (71 %)
+Writing at 0x000dcb74... (73 %)
+Writing at 0x000e27d3... (75 %)
+Writing at 0x000e8070... (77 %)
+Writing at 0x000edd54... (80 %)
+Writing at 0x000f455c... (82 %)
+Writing at 0x000fa1cf... (84 %)
+Writing at 0x000ff585... (86 %)
+Writing at 0x0010521d... (88 %)
+Writing at 0x0010f9a4... (91 %)
+Writing at 0x00117b53... (93 %)
+Writing at 0x0011d927... (95 %)
+Writing at 0x00124277... (97 %)
+Writing at 0x001295f9... (100 %)
+Wrote 1162528 bytes (727066 compressed) at 0x00010000 in 18.0 seconds (effective 516.8 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 105...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (105 compressed) at 0x00008000 in 0.1 seconds (effective 326.6 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
+eset;write_flash;@flash_args -D WORKING_DIRECTORY=C:/esp/CompleteCopy/build -P C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esptool_py/run_serial_tool.cmake"

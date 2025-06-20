@@ -1,0 +1,7 @@
+-- ccache will be used for faster recompilation
+-- Building ESP-IDF components for target esp32s3
+-- Configuring incomplete, errors occurred!
+See also "C:/esp/CompleteCopy/build/CMakeFiles/CMakeOutput.log".
+[0/1] Re-running CMake...
+FAILED: build.ninja 
+C:\esp\Espressif\tools\cmake\3.24.0\bin\cmake.exe --regenerate-during-build -SC:\esp\CompleteCopy -BC:\esp\CompleteCopy\build

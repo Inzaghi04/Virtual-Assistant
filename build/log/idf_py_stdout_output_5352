@@ -1,0 +1,19 @@
+-- ccache will be used for faster recompilation
+-- Building ESP-IDF components for target esp32s3
+-- Project sdkconfig file C:/esp/CompleteCopy/sdkconfig
+-- Compiler supported targets: xtensa-esp-elf
+-- App "main" version: 66ad460-dirty
+-- Adding linker script C:/esp/CompleteCopy/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script C:/esp/CompleteCopy/build/esp-idf/esp_system/ld/sections.ld.in
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3/ld/esp32s3.rom.ld
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3/ld/esp32s3.rom.api.ld
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3/ld/esp32s3.rom.libgcc.ld
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3/ld/esp32s3.rom.wdt.ld
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3/ld/esp32s3.rom.version.ld
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3/ld/esp32s3.rom.newlib.ld
+-- Adding linker script C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/esp32s3/ld/esp32s3.peripherals.ld
+-- Configuring incomplete, errors occurred!
+See also "C:/esp/CompleteCopy/build/CMakeFiles/CMakeOutput.log".
+[0/1] Re-running CMake...
+FAILED: build.ninja 
+C:\esp\Espressif\tools\cmake\3.24.0\bin\cmake.exe --regenerate-during-build -SC:\esp\CompleteCopy -BC:\esp\CompleteCopy\build

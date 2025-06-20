@@ -1,0 +1,15 @@
+CMake Warning (dev) at components/audio_procs/CMakeLists.txt:7:
+  Syntax Warning in cmake code at column 27
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Error at C:/esp/Espressif/frameworks/esp-idf-v5.3.1/tools/cmake/component.cmake:314 (message):
+  Include directory 'C:/esp/CompleteCopy/components/audio_procs/s' is not a
+  directory.
+Call Stack (most recent call first):
+  C:/esp/Espressif/frameworks/esp-idf-v5.3.1/tools/cmake/component.cmake:482 (__component_add_include_dirs)
+  components/audio_procs/CMakeLists.txt:5 (idf_component_register)
+
+
+ninja: error: rebuilding 'build.ninja': subcommand failed

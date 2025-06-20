@@ -1,0 +1,7 @@
+{
+    "idf.pythonInstallPath": "C:\\esp\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
+    "files.associations": {
+        "minimp3_ex.h": "c",
+        "i2s_audio.h": "c"
+    }
+}

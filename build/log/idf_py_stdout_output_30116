@@ -1,0 +1,184 @@
+[1/12] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D C:\esp\CompleteCopy\build\bootloader\esp-idf\esptool_py && C:\esp\Espressif\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/esp/CompleteCopy/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5260 bytes. 0x2da0 bytes (36%) free.
+[2/10] Building C object esp-idf/audio/CMakeFiles/__idf_audio.dir/audio.c.obj
+FAILED: esp-idf/audio/CMakeFiles/__idf_audio.dir/audio.c.obj 
+ccache C:\esp\Espressif\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe -DESP_PLATFORM -DIDF_VER=\"v5.3.1-dirty\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -IC:/esp/CompleteCopy/build/config -IC:/esp/CompleteCopy/components/audio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/newlib/platform_include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/config/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/config/include/freertos -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/config/xtensa/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/esp_additions/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/include/soc -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/include/soc/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/dma/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/ldo/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/port/esp32s3/. -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/port/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/heap/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/hal/platform_port/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/hal/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/hal/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/include/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_common/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_system/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_system/port/soc -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_system/port/include/private -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/xtensa/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/xtensa/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/xtensa/deprecated_include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/include/apps -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/include/apps/sntp -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/lwip/src/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/freertos/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/esp32xx/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/esp32xx/include/arch -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/esp32xx/include/sys -IC:/esp/CompleteCopy/components/helix_mp3_decoder/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/i2c/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/touch_sensor/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/twai/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/touch_sensor/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_pm/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_ringbuf/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_gpio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_pcnt/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_gptimer/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_spi/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_mcpwm/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_ana_cmpr/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_i2s/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdmmc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/sdmmc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdspi/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_dac/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_rmt/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_tsens/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdm/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_i2c/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_uart/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/vfs/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_ledc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_parlio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_usb_serial_jtag/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_event/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/fatfs/diskio -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/fatfs/src -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/fatfs/vfs -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/wear_levelling/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_partition/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/nvs_flash/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/spi_flash/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_http_client/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/json/cJSON -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_netif/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/port/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/library -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/esp_crt_bundle/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/3rdparty/everest/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/3rdparty/p256-m -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/3rdparty/p256-m/p256-m -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/wifi_apps/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/wifi_apps/nan_app/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/include/local -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_phy/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_phy/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_timer/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_http_server/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/http_parser -IC:/esp/CompleteCopy/components/i2s_audio/include -IC:/esp/CompleteCopy/components/sd_card/include -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fno-shrink-wrap -fmacro-prefix-map=C:/esp/CompleteCopy=. -fmacro-prefix-map=C:/esp/Espressif/frameworks/esp-idf-v5.3.1=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/audio/CMakeFiles/__idf_audio.dir/audio.c.obj -MF esp-idf\audio\CMakeFiles\__idf_audio.dir\audio.c.obj.d -o esp-idf/audio/CMakeFiles/__idf_audio.dir/audio.c.obj -c C:/esp/CompleteCopy/components/audio/audio.c
+In file included from C:/esp/CompleteCopy/components/i2s_audio/include/i2s_audio.h:4,
+                 from C:/esp/CompleteCopy/components/audio/include/audio.h:9,
+                 from C:/esp/CompleteCopy/components/audio/audio.c:1:
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/driver/i2s.h:27:2: warning: #warning "This set of I2S APIs has been deprecated, please include 'driver/i2s_std.h', 'driver/i2s_pdm.h' or 'driver/i2s_tdm.h' instead. if you want to keep using the old APIs and ignore this warning, you can enable 'Suppress legacy driver deprecated warning' option under 'I2S Configuration' menu in Kconfig" [-Wcpp]
+   27 | #warning "This set of I2S APIs has been deprecated, \
+      |  ^~~~~~~
+C:/esp/CompleteCopy/components/audio/include/audio.h:16: warning: "MAINBUF_SIZE" redefined
+   16 | #define MAINBUF_SIZE       1152
+      | 
+In file included from C:/esp/CompleteCopy/components/audio/include/audio.h:8:
+C:/esp/CompleteCopy/components/helix_mp3_decoder/include/mp3dec.h:76: note: this is the location of the previous definition
+   76 | #define MAINBUF_SIZE    1940
+      | 
+C:/esp/CompleteCopy/components/audio/audio.c: In function 'amplify_audio':
+C:/esp/CompleteCopy/components/audio/audio.c:13:24: warning: comparison is always false due to limited range of data type [-Wtype-limits]
+   13 |         if (pcm_buf[i] > 32767) pcm_buf[i] = 32767;
+      |                        ^
+C:/esp/CompleteCopy/components/audio/audio.c:14:24: warning: comparison is always false due to limited range of data type [-Wtype-limits]
+   14 |         if (pcm_buf[i] < -32768) pcm_buf[i] = -32768;
+      |                        ^
+C:/esp/CompleteCopy/components/audio/audio.c: In function 'stream_and_play_mp3':
+C:/esp/CompleteCopy/components/audio/audio.c:19:5: error: 'stop_playback' undeclared (first use in this function); did you mean 'set_stop_playback'?
+   19 |     stop_playback = false;
+      |     ^~~~~~~~~~~~~
+      |     set_stop_playback
+C:/esp/CompleteCopy/components/audio/audio.c:19:5: note: each undeclared identifier is reported only once for each function it appears in
+C:/esp/CompleteCopy/components/audio/audio.c: At top level:
+C:/esp/CompleteCopy/components/audio/audio.c:165:18: error: static declaration of 'upload_event_handler' follows non-static declaration
+  165 | static esp_err_t upload_event_handler(esp_http_client_event_t *evt) {
+      |                  ^~~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/include/audio.h:33:11: note: previous declaration of 'upload_event_handler' with type 'esp_err_t(esp_http_client_event_t *)' {aka 'int(struct esp_http_client_event *)'}
+   33 | esp_err_t upload_event_handler(esp_http_client_event_t *evt);
+      |           ^~~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c: In function 'upload_wav_task':
+C:/esp/CompleteCopy/components/audio/audio.c:200:16: error: 'server_url' undeclared (first use in this function)
+  200 |         .url = server_url,
+      |                ^~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:236:9: error: unknown type name 'cJSON'
+  236 |         cJSON *root = cJSON_Parse(resp);
+      |         ^~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:236:23: error: implicit declaration of function 'cJSON_Parse' [-Werror=implicit-function-declaration]
+  236 |         cJSON *root = cJSON_Parse(resp);
+      |                       ^~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:236:23: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+C:/esp/CompleteCopy/components/audio/audio.c:238:13: error: unknown type name 'cJSON'
+  238 |             cJSON *error = cJSON_GetObjectItem(root, "error");
+      |             ^~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:238:28: error: implicit declaration of function 'cJSON_GetObjectItem' [-Werror=implicit-function-declaration]
+  238 |             cJSON *error = cJSON_GetObjectItem(root, "error");
+      |                            ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:238:28: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+C:/esp/CompleteCopy/components/audio/audio.c:239:26: error: implicit declaration of function 'cJSON_IsString' [-Werror=implicit-function-declaration]
+  239 |             if (error && cJSON_IsString(error)) {
+      |                          ^~~~~~~~~~~~~~
+In file included from C:/esp/CompleteCopy/components/audio/include/audio.h:7:
+C:/esp/CompleteCopy/components/audio/audio.c:240:57: error: request for member 'valuestring' in something not a structure or union
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                                                         ^~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:435:137: note: in definition of macro 'ESP_LOG_LEVEL'
+  435 |         if (level==ESP_LOG_ERROR )          { esp_log_write(ESP_LOG_ERROR,      tag, LOG_FORMAT(E, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                         ^~~~~~~~~~~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:366:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  366 | #define ESP_LOGW( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_WARN,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:17: note: in expansion of macro 'ESP_LOGW'
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                 ^~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:57: error: request for member 'valuestring' in something not a structure or union
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                                                         ^~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:436:137: note: in definition of macro 'ESP_LOG_LEVEL'
+  436 |         else if (level==ESP_LOG_WARN )      { esp_log_write(ESP_LOG_WARN,       tag, LOG_FORMAT(W, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                         ^~~~~~~~~~~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:366:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  366 | #define ESP_LOGW( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_WARN,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:17: note: in expansion of macro 'ESP_LOGW'
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                 ^~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:57: error: request for member 'valuestring' in something not a structure or union
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                                                         ^~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:437:137: note: in definition of macro 'ESP_LOG_LEVEL'
+  437 |         else if (level==ESP_LOG_DEBUG )     { esp_log_write(ESP_LOG_DEBUG,      tag, LOG_FORMAT(D, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                         ^~~~~~~~~~~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:366:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  366 | #define ESP_LOGW( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_WARN,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:17: note: in expansion of macro 'ESP_LOGW'
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                 ^~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:57: error: request for member 'valuestring' in something not a structure or union
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                                                         ^~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:438:137: note: in definition of macro 'ESP_LOG_LEVEL'
+  438 |         else if (level==ESP_LOG_VERBOSE )   { esp_log_write(ESP_LOG_VERBOSE,    tag, LOG_FORMAT(V, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                         ^~~~~~~~~~~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:366:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  366 | #define ESP_LOGW( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_WARN,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:17: note: in expansion of macro 'ESP_LOGW'
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                 ^~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:57: error: request for member 'valuestring' in something not a structure or union
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                                                         ^~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:439:137: note: in definition of macro 'ESP_LOG_LEVEL'
+  439 |         else                                { esp_log_write(ESP_LOG_INFO,       tag, LOG_FORMAT(I, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                         ^~~~~~~~~~~
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include/esp_log.h:366:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  366 | #define ESP_LOGW( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_WARN,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:240:17: note: in expansion of macro 'ESP_LOGW'
+  240 |                 ESP_LOGW(TAG, "Lỗi từ server: %s", error->valuestring);
+      |                 ^~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:242:17: error: unknown type name 'cJSON'
+  242 |                 cJSON *text = cJSON_GetObjectItem(root, "text");
+      |                 ^~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:242:31: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  242 |                 cJSON *text = cJSON_GetObjectItem(root, "text");
+      |                               ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:244:50: error: request for member 'valuestring' in something not a structure or union
+  244 |                     strncpy(recognized_text, text->valuestring, sizeof(recognized_text) - 1);
+      |                                                  ^~
+C:/esp/CompleteCopy/components/audio/audio.c:246:21: error: implicit declaration of function 'control_led' [-Werror=implicit-function-declaration]
+  246 |                     control_led(recognized_text);
+      |                     ^~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:249:17: error: unknown type name 'cJSON'
+  249 |                 cJSON *mp3_url = cJSON_GetObjectItem(root, "mp3_url");
+      |                 ^~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:249:34: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  249 |                 cJSON *mp3_url = cJSON_GetObjectItem(root, "mp3_url");
+      |                                  ^~~~~~~~~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:251:50: error: request for member 'valuestring' in something not a structure or union
+  251 |                     strncpy(uploaded_url, mp3_url->valuestring, sizeof(uploaded_url) - 1);
+      |                                                  ^~
+C:/esp/CompleteCopy/components/audio/audio.c:259:13: error: implicit declaration of function 'cJSON_Delete' [-Werror=implicit-function-declaration]
+  259 |             cJSON_Delete(root);
+      |             ^~~~~~~~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c:230:9: warning: unused variable 'status' [-Wunused-variable]
+  230 |     int status = esp_http_client_get_status_code(client);
+      |         ^~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c: In function 'recording':
+C:/esp/CompleteCopy/components/audio/audio.c:297:28: error: 'BUTTON' undeclared (first use in this function)
+  297 |      while (gpio_get_level(BUTTON) == 0)
+      |                            ^~~~~~
+C:/esp/CompleteCopy/components/audio/audio.c: At top level:
+C:/esp/CompleteCopy/components/audio/audio.c:175:13: warning: 'upload_wav_task' defined but not used [-Wunused-function]
+  175 | static void upload_wav_task(void *pv) {
+      |             ^~~~~~~~~~~~~~~
+cc1.exe: some warnings being treated as errors
+[3/10] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj 
+ccache C:\esp\Espressif\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe -DESP_PLATFORM -DIDF_VER=\"v5.3.1-dirty\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -IC:/esp/CompleteCopy/build/config -IC:/esp/CompleteCopy/main -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/newlib/platform_include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/config/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/config/include/freertos -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/config/xtensa/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/esp_additions/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/include/soc -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/include/soc/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/dma/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/ldo/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/port/esp32s3/. -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/port/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/heap/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/log/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/soc/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/hal/platform_port/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/hal/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/hal/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/include/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32s3 -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_common/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_system/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_system/port/soc -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_system/port/include/private -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/xtensa/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/xtensa/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/xtensa/deprecated_include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/include/apps -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/include/apps/sntp -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/lwip/src/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/freertos/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/esp32xx/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/esp32xx/include/arch -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/lwip/port/esp32xx/include/sys -IC:/esp/CompleteCopy/components/helix_mp3_decoder/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/i2c/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/touch_sensor/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/twai/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/touch_sensor/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_pm/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_ringbuf/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_gpio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_pcnt/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_gptimer/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_spi/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_mcpwm/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_ana_cmpr/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_i2s/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdmmc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/sdmmc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdspi/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_dac/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_rmt/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_tsens/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_sdm/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_i2c/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_uart/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/vfs/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_ledc/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_parlio/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_driver_usb_serial_jtag/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_event/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/fatfs/diskio -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/fatfs/src -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/fatfs/vfs -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/wear_levelling/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_partition/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/nvs_flash/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/spi_flash/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_http_client/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/json/cJSON -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_netif/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/port/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/library -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/esp_crt_bundle/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/3rdparty/everest/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/3rdparty/p256-m -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/mbedtls/mbedtls/3rdparty/p256-m/p256-m -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/wifi_apps/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/wifi_apps/nan_app/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_wifi/include/local -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_phy/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_phy/esp32s3/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_timer/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_http_server/include -IC:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/http_parser -IC:/esp/CompleteCopy/components/i2s_audio/include -IC:/esp/CompleteCopy/components/sd_card/include -IC:/esp/CompleteCopy/components/wifi/include -IC:/esp/CompleteCopy/components/audio/include -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fno-shrink-wrap -fmacro-prefix-map=C:/esp/CompleteCopy=. -fmacro-prefix-map=C:/esp/Espressif/frameworks/esp-idf-v5.3.1=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj -MF esp-idf\main\CMakeFiles\__idf_main.dir\main.c.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj -c C:/esp/CompleteCopy/main/main.c
+In file included from C:/esp/CompleteCopy/components/i2s_audio/include/i2s_audio.h:4,
+                 from C:/esp/CompleteCopy/main/main.c:19:
+C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/driver/i2s.h:27:2: warning: #warning "This set of I2S APIs has been deprecated, please include 'driver/i2s_std.h', 'driver/i2s_pdm.h' or 'driver/i2s_tdm.h' instead. if you want to keep using the old APIs and ignore this warning, you can enable 'Suppress legacy driver deprecated warning' option under 'I2S Configuration' menu in Kconfig" [-Wcpp]
+   27 | #warning "This set of I2S APIs has been deprecated, \
+      |  ^~~~~~~
+In file included from C:/esp/CompleteCopy/main/main.c:22:
+C:/esp/CompleteCopy/components/audio/include/audio.h:16: warning: "MAINBUF_SIZE" redefined
+   16 | #define MAINBUF_SIZE       1152
+      | 
+In file included from C:/esp/CompleteCopy/main/main.c:8:
+C:/esp/CompleteCopy/components/helix_mp3_decoder/include/mp3dec.h:76: note: this is the location of the previous definition
+   76 | #define MAINBUF_SIZE    1940
+      | 
+C:/esp/CompleteCopy/main/main.c: In function 'button_isr_handler':
+C:/esp/CompleteCopy/main/main.c:34:9: error: 'stop_playback' undeclared (first use in this function); did you mean 'set_stop_playback'?
+   34 |         stop_playback = true;
+      |         ^~~~~~~~~~~~~
+      |         set_stop_playback
+C:/esp/CompleteCopy/main/main.c:34:9: note: each undeclared identifier is reported only once for each function it appears in
+C:/esp/CompleteCopy/main/main.c: In function 'app_main':
+C:/esp/CompleteCopy/main/main.c:97:29: error: 'upload_wav_task' undeclared (first use in this function)
+   97 |                 xTaskCreate(upload_wav_task, "upload_wav", 8192, NULL, 5, NULL);
+      |                             ^~~~~~~~~~~~~~~
+ninja: build stopped: subcommand failed.

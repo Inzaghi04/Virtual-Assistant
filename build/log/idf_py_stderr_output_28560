@@ -1,0 +1,18 @@
+[0;33m--- Warning: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM3 instead...[0m
+[0;33m--- esp-idf-monitor 1.5.0 on \\.\COM3 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x420235f8: i2s_write at C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/i2s_legacy.c:1704
+[0m
+[0;33m--- 0x400556d5: strlen in ROM
+0x400556e5: strlen in ROM
+[0m
+[0;33m--- 0x420235f5: i2s_write at C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/driver/deprecated/i2s_legacy.c:1704
+0x42016209: i2s_audio_write at C:/esp/CompleteCopy/components/i2s_audio/i2s_audio.c:58
+0x4200bd4e: stream_and_play_mp3 at C:/esp/CompleteCopy/main/main.c:502
+0x4200c082: upload_wav_task at C:/esp/CompleteCopy/main/main.c:642
+0x4037e9fd: vPortTaskWrapper at C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:134
+[0m
+[0;33m--- 0x4037c27e: esp_cpu_wait_for_intr at C:/esp/Espressif/frameworks/esp-idf-v5.3.1/components/esp_hw_support/cpu.c:64
+[0m
+[0m
