@@ -12,8 +12,8 @@ from collections import defaultdict
 import requests
 
 # === Cấu hình ===
-API_KEY = "AIzaSyAgi1VdU1FeB2c_XGe_SEbW_skK8VetwXs"  # ← thay bằng API key của bạn
-SERPER_API_KEY = "9373f7d9ca476cc41a11c4f813612e83bb203060"
+API_KEY = "YOUR_API_KEY"  # ← thay bằng API key của bạn
+SERPER_API_KEY = "YOUR_API_KEY"
 UPLOAD_FOLDER = "./uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
