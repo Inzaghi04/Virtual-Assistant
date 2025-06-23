@@ -12,12 +12,11 @@ from collections import defaultdict
 import requests
 
 # === Cấu hình ===
-API_KEY = "YOUR_API_KEY"  # ← thay bằng API key của bạn
-SERPER_API_KEY = "YOUR_API_KEY"
+API_KEY = "AIzaSyAe7XUOcyHp8woKkWYo6R4vT71rBrD1_MU"  # ← Thay bằng API key của bạn
+SERPER_API_KEY = "3d0f5ea1a6b28d5c7c44a43ec8987ea432fe4cee"
 UPLOAD_FOLDER = "./uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Cấu hình Gemini
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-2.0-flash")
 
@@ -25,21 +24,27 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 executor = ThreadPoolExecutor(max_workers=2)
-
-# Lưu lịch sử hội thoại theo IP (bỏ giới hạn turn)
 user_histories = defaultdict(list)
 
+# === Hàm kiểm tra có nên tìm kiếm trên Google hay không ===
+def should_search_web(prompt):
+    prompt = prompt.lower()
+    keywords = [
+        "thời tiết", "hôm nay mấy độ", "trời",
+        "ngày bao nhiêu", "thứ mấy", "hôm nay là ngày",
+        "bao nhiêu độ", "nhiệt độ", "dự báo",
+        "ngày mai", "lịch", "giờ", "mấy giờ", "giờ mấy"
+    ]
+    return any(keyword in prompt for keyword in keywords)
+
+# === Hàm tìm kiếm web ===
 def search_web(query):
     url = "https://google.serper.dev/search"
     headers = {
         "X-API-KEY": SERPER_API_KEY,
         "Content-Type": "application/json"
     }
-    data = {
-        "q": query,
-        "gl": "vn",
-        "hl": "vi"
-    }
+    data = {"q": query, "gl": "vn", "hl": "vi"}
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()
@@ -50,7 +55,7 @@ def search_web(query):
         print("❌ Lỗi khi tìm kiếm:", e)
         return "Không thể truy cập thông tin mới."
 
-# === Hàm nhận dạng giọng nói từ file âm thanh ===
+# === Nhận dạng giọng nói từ audio ===
 def audio_to_text(filepath):
     recognizer = sr.Recognizer()
     with sr.AudioFile(filepath) as source:
@@ -59,20 +64,23 @@ def audio_to_text(filepath):
         text = recognizer.recognize_google(audio, language="vi-VN")
         return text
     except Exception as e:
-        print("❌ Lỗi khi nhận dạng giọng nói:", e)
+        print("❌ Lỗi nhận dạng giọng nói:", e)
         return None
 
-# === Hàm gửi văn bản tới Gemini với lịch sử hội thoại + tạo file mp3 ===
+# === Xử lý với Gemini và tạo file MP3 ===
 def process_with_gemini_and_save_mp3(prompt, mp3_filename, user_ip):
     history = user_histories[user_ip]
+    system_prompt = "Bạn hãy trả lời ngắn gọn trong 1-2 câu. (Lưu ý các câu hãy để hết trên 1 dòng.)\n"
 
-    short_answer_prompt = "Bạn hãy trả lời ngắn gọn trong 1-2 câu. (Lưu ý các câu hãy để hết trên 1 dòng.)\n"
 
-    # Tìm kiếm thông tin mới nhất từ Google qua Serper
-    web_info = search_web(prompt)
-    web_context = f"Thông tin tìm kiếm từ Google:\n{web_info}\n\n"
+    # Chỉ tìm kiếm nếu cần
+    web_context = ""
+    if should_search_web(prompt):
+        web_info = search_web(prompt)
+        web_context = f"Thông tin tìm kiếm từ Google:\n{web_info}\n\n"
 
-    prompt_parts = [short_answer_prompt, web_context]
+    # Ghép prompt
+    prompt_parts = [system_prompt, web_context]
     for turn in history:
         prompt_parts.append(f"Người dùng: {turn['user']}")
         prompt_parts.append(f"Trợ lý: {turn['assistant']}")
@@ -80,9 +88,9 @@ def process_with_gemini_and_save_mp3(prompt, mp3_filename, user_ip):
     prompt_parts.append("Trợ lý:")
 
     full_prompt = "\n".join(prompt_parts)
+
     response = model.generate_content(full_prompt)
     reply_text = response.text.strip()
-
     history.append({"user": prompt, "assistant": reply_text})
 
     tts = gTTS(reply_text, lang="vi")
@@ -90,7 +98,7 @@ def process_with_gemini_and_save_mp3(prompt, mp3_filename, user_ip):
     print(f"✅ Đã lưu file MP3: {mp3_filename}")
     return reply_text
 
-# === Ghi log vào Excel bằng pandas ===
+# === Ghi log vào Excel ===
 def save_to_excel_pandas(text, reply_text, response_time, filename="logs.xlsx"):
     new_data = {
         "Thời gian": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
@@ -107,9 +115,9 @@ def save_to_excel_pandas(text, reply_text, response_time, filename="logs.xlsx"):
         combined_df = new_df
 
     combined_df.to_excel(filename, index=False)
-    print(f"📊 Đã lưu log vào file Excel: {filename}")
+    print(f"📊 Đã lưu log vào: {filename}")
 
-# === Hàm tạo file MP3 với nội dung "Mời bạn nói lại" ===
+# === Tạo file MP3 khi không nhận diện được ===
 def create_retry_mp3(mp3_filename):
     retry_text = "Mời bạn nói lại"
     tts = gTTS(retry_text, lang="vi")
@@ -117,7 +125,7 @@ def create_retry_mp3(mp3_filename):
     print(f"✅ Đã tạo file MP3 retry: {mp3_filename}")
     return retry_text
 
-# === API upload file âm thanh và xử lý ===
+# === API nhận file audio và xử lý ===
 @app.route("/upload-audio", methods=["POST"])
 def upload_audio():
     start_time = time.time()
@@ -132,11 +140,11 @@ def upload_audio():
     filename = secure_filename(file.filename)
     audio_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(audio_path)
-    print(f"📥 Nhận file: {audio_path}")
+    print(f"📥 Đã nhận file: {audio_path}")
 
     user_ip = request.remote_addr
 
-    # Nhận dạng văn bản
+    # Nhận dạng giọng nói
     future_text = executor.submit(audio_to_text, audio_path)
     text = future_text.result(timeout=15)
 
@@ -152,19 +160,19 @@ def upload_audio():
             "text": "Không nhận diện được",
             "reply_text": reply_text,
             "mp3_url": mp3_url
-        }), 200
+        })
 
     print(f"📝 Văn bản nhận dạng: {text.lower()}")
 
     future_reply = executor.submit(process_with_gemini_and_save_mp3, text, mp3_path, user_ip)
-    reply_text = future_reply.result(timeout=30)
+    reply_text = future_reply.result(timeout=120)
 
     mp3_url = request.host_url + f"uploads/{mp3_filename}"
-    print(f"🌐 URL nội bộ cho file MP3: {mp3_url}")
-    print(f"📝 Văn bản phản hồi: {reply_text}")
+    print(f"🌐 URL nội bộ: {mp3_url}")
+    print(f"📝 Phản hồi: {reply_text}")
 
     elapsed_time = time.time() - start_time
-    print(f"⚡ Thời gian phản hồi hệ thống: {elapsed_time:.2f} giây")
+    print(f"⚡ Thời gian phản hồi: {elapsed_time:.2f} giây")
 
     save_to_excel_pandas(text.lower(), reply_text, elapsed_time)
 
@@ -174,6 +182,7 @@ def upload_audio():
         "mp3_url": mp3_url
     })
 
+# === Trả file MP3 ===
 @app.route('/uploads/<path:filename>')
 def serve_uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
